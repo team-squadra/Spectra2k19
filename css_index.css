@@ -98,7 +98,11 @@ body {
     cursor: pointer;
     letter-spacing: 2px;
 }
-
+#myInput{
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    letter-spacing: 2px;
+}
 .box input[type="submit"]:hover,
 #sell_btn:hover {
     background: #2ecc71;
