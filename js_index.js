@@ -2,6 +2,7 @@ var t_array = [];
 var t_o_id_array = [];
 var t_o_n_array = [];
 var s_n_array = [];
+var hh = 0;
 
 declare_arrays();
 Arrange_table();
@@ -22,6 +23,9 @@ firebase.auth().onAuthStateChanged(function (user) {
       Seller_name.on('value', snap => {
         var Seller_name = snap.val();
         document.getElementById("user_name").innerText = Seller_name;
+        for (let index = 1; index < 151; index++) {
+          load_data(index);
+        }
       });
 
     }
@@ -118,12 +122,13 @@ function Sell_a_ticket() {
 
 }
 
-for (let index = 1; index < 151; index++) {
-  load_data(index);
-}
+
+
+
+
 
 function load_data(x) {
-  var hh = 0;
+  
 
   /////////////////////////////////////////////////////////  
 
@@ -147,7 +152,7 @@ function load_data(x) {
     document.getElementById(s_n_array[x]).innerText = s_n;
 
     var current_user = document.getElementById("user_name").innerText;
-    if(s_n == "kavindu tissera"){
+    if(s_n == current_user){
       hh++;
       document.getElementById("demo").innerText = hh;
     }
