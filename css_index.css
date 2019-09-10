@@ -192,13 +192,13 @@ body {
     /* Position the search icon */
     background-repeat: no-repeat;
     /* Do not repeat the icon image */
-    width: 30%;
+    width: 20%;
     /* width */
     font-size: 16px;
     /* Increase font-size */
     padding: 12px 20px 12px 40px;
     /* Add some padding */
-    border: 3px solid #f44336;
+    border: 3px solid #2ecc71;
     /* Add a red border */
     border-radius: 17px 17px 17px 17px;
     /*make corners round*/
@@ -212,7 +212,7 @@ body {
 
 #myInput:hover {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
-    width: 60%;
+    width: 40%;
 }
 
 #myInput {

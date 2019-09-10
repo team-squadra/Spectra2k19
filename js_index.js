@@ -123,7 +123,7 @@ function Sell_a_ticket() {
 
 
 function load_data(x) {
-  
+
 
   /////////////////////////////////////////////////////////  
 
@@ -148,12 +148,12 @@ function load_data(x) {
 
     var current_user = document.getElementById("user_name").innerText;
 
-      if(s_n != null){
-        kk++;
-        document.getElementById("demo2").innerText = kk;
-      }
+    if (s_n != null) {
+      kk++;
+      document.getElementById("demo2").innerText = kk;
+    }
 
-    if(s_n == current_user){
+    if (s_n == current_user) {
       hh++;
       document.getElementById("demo").innerText = hh;
     }
@@ -254,7 +254,7 @@ function declare_arrays() {
 
 
 function Arrange_table() {
-  
+
   for (var j = 1; j < 151; j++) {
     var txt_value = document.getElementById(t_o_id_array[j]).innerText;
 
@@ -263,11 +263,37 @@ function Arrange_table() {
     }
     else {
       document.getElementById(t_array[j]).style.display = '';
-      
+
     }
   }
 }
 
+
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  var inputval = document.getElementById("myInput").value;
+  if (inputval == "") {
+    Arrange_table();
+  }
+  else {
+    filter = input.value.toUpperCase();
+    table = document.getElementById("tickets");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+}
 
 
 
