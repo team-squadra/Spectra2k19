@@ -123,33 +123,38 @@ for (let index = 1; index < 151; index++) {
 }
 
 function load_data(x) {
+  var hh = 0;
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////  
 
-    /////////////////////////////////////////////////////////  
-    var t_o_id = firebase.database().ref().child("tickets").child(x).child("buyer_nsbm_id");
-    t_o_id.on('value', snap => {
-      var t_o_id = snap.val();
-      document.getElementById(t_o_id_array[x]).innerText = t_o_id;
-      Arrange_table();
-    });
-    var t_o_n = firebase.database().ref().child("tickets").child(x).child("buyer_name");
-    t_o_n.on('value', snap => {
-      var t_o_n = snap.val();
-      document.getElementById(t_o_n_array[x]).innerText = t_o_n;
-      Arrange_table();
-    });
-    var s_n = firebase.database().ref().child("tickets").child(x).child("seller_name");
-    s_n.on('value', snap => {
-      var s_n = snap.val();
-      document.getElementById(s_n_array[x]).innerText = s_n;
-      Arrange_table();
-    });
-    /////////////////////////////////////////////////////////
-  
+  var t_o_id = firebase.database().ref().child("tickets").child(x).child("buyer_nsbm_id");
+  t_o_id.on('value', snap => {
+    var t_o_id = snap.val();
+    document.getElementById(t_o_id_array[x]).innerText = t_o_id;
+    Arrange_table();
+  });
 
+  var t_o_n = firebase.database().ref().child("tickets").child(x).child("buyer_name");
+  t_o_n.on('value', snap => {
+    var t_o_n = snap.val();
+    document.getElementById(t_o_n_array[x]).innerText = t_o_n;
+    Arrange_table();
+  });
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////
+  var s_n = firebase.database().ref().child("tickets").child(x).child("seller_name");
+  s_n.on('value', snap => {
+    var s_n = snap.val();
+    document.getElementById(s_n_array[x]).innerText = s_n;
+
+    var current_user = document.getElementById("user_name").innerText;
+    if(s_n == "kavindu tissera"){
+      hh++;
+      document.getElementById("demo").innerText = hh;
+    }
+
+    Arrange_table();
+  });
+  /////////////////////////////////////////////////////////
 
 }
 
@@ -244,7 +249,7 @@ function declare_arrays() {
 
 
 function Arrange_table() {
-
+  
   for (var j = 1; j < 151; j++) {
     var txt_value = document.getElementById(t_o_id_array[j]).innerText;
 
