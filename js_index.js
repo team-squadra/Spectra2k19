@@ -87,35 +87,46 @@ function Sell_a_ticket() {
   var buyer_name = document.getElementById("name").value;
   document.getElementById("error").style.display = "";
 
+
   const ext_buyer_ticket_no = firebase.database().ref().child("tickets").child(buyer_ticket_no - 100);
   ext_buyer_ticket_no.on('value', snap => {
     const ext_buyer_ticket_no = JSON.stringify(snap.val());
 
-    if (buyer_ticket_no == '' || buyer_nsbm_id == '' || buyer_name == '') {
-      document.getElementById("error").innerText = "Values cannot be null";
-    }
-    else if (buyer_ticket_no <= 100 || buyer_ticket_no > 250) {
-      document.getElementById("error").innerText = "Invalid Ticket number";
-    }
-    else if (ext_buyer_ticket_no != "null") {
-      document.getElementById("error").innerText = "This Ticket Already has been sold!!";
-    }
-    else {
-      var firebaseRef = firebase.database().ref();
-      var seller = document.getElementById("user_name").innerText;
+    var ext_buyer_nsbm_id = firebase.database().ref().child("nsbmids").child(buyer_nsbm_id);
+    ext_buyer_nsbm_id.on('value', snap => {
+      var ext_buyer_nsbm_id = snap.val();
 
-      firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("buyer_nsbm_id").set(buyer_nsbm_id);
-      firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("buyer_name").set(buyer_name);
-      firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("seller_name").set(seller);
+    
+      if (buyer_ticket_no == '' || buyer_nsbm_id == '' || buyer_name == '') {
+        document.getElementById("error").innerText = "Values cannot be null";
+      }
+      else if(ext_buyer_nsbm_id == buyer_nsbm_id){
+        document.getElementById("error").innerText = "This id is already taken !!";
+      }
+      else if (buyer_ticket_no <= 100 || buyer_ticket_no > 250) {
+        document.getElementById("error").innerText = "Invalid Ticket number";
+      }
+      else if (ext_buyer_ticket_no != "null") {
+        document.getElementById("error").innerText = "This Ticket Already has been sold!!";
+      }
+      else {
+        var firebaseRef = firebase.database().ref();
+        var seller = document.getElementById("user_name").innerText;
 
-      document.getElementById("error").style.display = "none";
-      document.getElementById("Success").innerText = "Success";
-      document.getElementById("ticket_no").value = "";
-      document.getElementById("nsbm_id").value = "";
-      document.getElementById("name").value = "";
+        firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("buyer_nsbm_id").set(buyer_nsbm_id);
+        firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("buyer_name").set(buyer_name);
+        firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("seller_name").set(seller);
+        firebaseRef.child("nsbmids").child(buyer_nsbm_id).set(buyer_nsbm_id);
+
+        document.getElementById("error").style.display = "none";
+        document.getElementById("Success").innerText = "Success";
+        document.getElementById("ticket_no").value = "";
+        document.getElementById("nsbm_id").value = "";
+        document.getElementById("name").value = "";
 
 
-    }
+      }
+    });
 
   });
 
