@@ -210,7 +210,7 @@ body {
 }
 
 .hero-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("h1.jpg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("e.jpg");
     height: 300px;
     width: 100%;
     background-position: center;
@@ -228,6 +228,8 @@ body {
     color: white;
     font-family: 'Satisfy', cursive;
     font-weight: 500;
+    font-size: 150px;
+    padding-top: 60px;
 }
 
 .container {
