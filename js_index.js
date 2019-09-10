@@ -3,6 +3,7 @@ var t_o_id_array = [];
 var t_o_n_array = [];
 var s_n_array = [];
 var hh = 0;
+var kk = 0;
 
 declare_arrays();
 Arrange_table();
@@ -156,6 +157,10 @@ function load_data(x) {
       hh++;
       document.getElementById("demo").innerText = hh;
     }
+    if(s_n != "null"){
+      kk++;
+      document.getElementById("demo2").innerText = kk;
+    }
 
     Arrange_table();
   });
@@ -263,6 +268,7 @@ function Arrange_table() {
     }
     else {
       document.getElementById(t_array[j]).style.display = '';
+      
     }
   }
 }
