@@ -106,9 +106,10 @@ body {
 #user_name {
     float: right;
     padding: 10px;
-    background: #2ecc71;
+    background:transparent;
     color: white;
     border-radius: 10px 0px 10px 10px;
+    border: 2px solid white;
 }
 
 #Logout {
