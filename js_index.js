@@ -153,15 +153,16 @@ function load_data(x) {
     document.getElementById(s_n_array[x]).innerText = s_n;
 
     var current_user = document.getElementById("user_name").innerText;
+
+      if(s_n != null){
+        kk++;
+        document.getElementById("demo2").innerText = kk;
+      }
+
     if(s_n == current_user){
       hh++;
       document.getElementById("demo").innerText = hh;
     }
-    if(s_n != "null"){
-      kk++;
-      document.getElementById("demo2").innerText = kk;
-    }
-
     Arrange_table();
   });
   /////////////////////////////////////////////////////////
