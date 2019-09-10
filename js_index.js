@@ -55,8 +55,6 @@ function login() {
 
 }
 
-
-
 function logout() {
   firebase.auth().signOut();
 }
@@ -122,10 +120,6 @@ function Sell_a_ticket() {
   });
 
 }
-
-
-
-
 
 
 function load_data(x) {
