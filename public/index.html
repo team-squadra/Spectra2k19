@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <link rel="icon" type="image/png" href="ico.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Spectra2k19</title>
+    <link rel="stylesheet" href="css_index.css">
+    <link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+
+
+<body>
+
+    <div class="box" id="login_div">
+        <img src="d.png" style="width: 150px;height: 150px;" data-aos="flip-down" data-aos-duration="1500"><br>
+        <label class="Spectra" data-aos="zoom-in-right" data-aos-duration="2000">Spectra</label>
+        <input type="email" placeholder="Email" id="email_field">
+        <input type="password" placeholder="Password" id="password_field">
+        <input type="submit" value="Login" onclick="login()">
+    </div>
+
+
+    <div id="Home_div" style="display: none;">
+
+
+        <div class="hero-image">
+            <div class="hero-text">
+            	Spectra
+            </div>
+        </div>
+
+
+        <div id="user" data-aos="fade-up" data-aos-anchor-placement="bottom-center">
+            <table>
+                <tr>
+                    <td>
+                        <label id="user_name"></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td> <button id="Logout" onclick="logout()">Logout</button></td>
+                </tr>
+            </table>
+        </div>
+
+        <center>
+            <button id="sell_btn" onclick="document.getElementById('Sell_a_ticket').style.display='block'" style="border: 2px solid white;">Sell a
+                ticket</button>
+        </center>
+
+        <center>
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for tickect number.." >
+        </center>
+
+        <center>
+        	<table>
+        		<tr>
+        			<td id="t_count">ඔයා විකුණපු ගාන :</td>
+        			<td id="t_count"><p id="demo">count</p></td>
+        			<td id="emphty"></td>
+        			<td id="t_count">ඔක්කොම විකුණපු ගාන :</td>
+        			<td id="t_count"><p id="demo2">count</p></td>
+        		</tr>
+        	</table>
+        </center>
+
+        <center>
+            <div style="height: 400px;overflow: auto;">
+                <center>
+                    <table id="tickets">
+                        <tr>
+                            <th>Tickect NO</th>
+                            <th>NSBM ID</th>
+                            <th>Owner</th>
+                            <th>Seller</th>
+                        </tr>
+                        <tr id="t_1">
+                            <td id="t_id_1">101</td>
+                            <td id="t_o_id_1"></td>
+                            <td id="t_o_n_1"></td>
+                            <td id="s_n_1"></td>
+                        </tr>
+                        <tr id="t_2">
+                            <td id="t_id_2">102</td>
+                            <td id="t_o_id_2"></td>
+                            <td id="t_o_n_2"></td>
+                            <td id="s_n_2"></td>
+                        </tr>
+                        <tr id="t_3">
+                            <td id="t_id_3">103</td>
+                            <td id="t_o_id_3"></td>
+                            <td id="t_o_n_3"></td>
+                            <td id="s_n_3"></td>
+                        </tr>
+                        <tr id="t_4">
+                            <td id="t_id_4">104</td>
+                            <td id="t_o_id_4"></td>
+                            <td id="t_o_n_4"></td>
+                            <td id="s_n_4"></td>
+                        </tr>
+                        <tr id="t_5">
+                            <td id="t_id_5">105</td>
+                            <td id="t_o_id_5"></td>
+                            <td id="t_o_n_5"></td>
+                            <td id="s_n_5"></td>
+                        </tr>
+                        <tr id="t_6">
+                            <td id="t_id_6">106</td>
+                            <td id="t_o_id_6"></td>
+                            <td id="t_o_n_6"></td>
+                            <td id="s_n_6"></td>
+                        </tr>
+                        <tr id="t_7">
+                            <td id="t_id_7">107</td>
+                            <td id="t_o_id_7"></td>
+                            <td id="t_o_n_7"></td>
+                            <td id="s_n_7"></td>
+                        </tr>
+                        <tr id="t_8">
+                            <td id="t_id_8">108</td>
+                            <td id="t_o_id_8"></td>
+                            <td id="t_o_n_8"></td>
+                            <td id="s_n_8"></td>
+                        </tr>
+                        <tr id="t_9">
+                            <td id="t_id_9">109</td>
+                            <td id="t_o_id_9"></td>
+                            <td id="t_o_n_9"></td>
+                            <td id="s_n_9"></td>
+                        </tr>
+                        <tr id="t_10">
+                            <td id="t_id_10">110</td>
+                            <td id="t_o_id_10"></td>
+                            <td id="t_o_n_10"></td>
+                            <td id="s_n_10"></td>
+                        </tr>
+                        <tr id="t_11">
+                            <td id="t_id_11">111</td>
+                            <td id="t_o_id_11"></td>
+                            <td id="t_o_n_11"></td>
+                            <td id="s_n_11"></td>
+                        </tr>
+                        <tr id="t_12">
+                            <td id="t_id_12">112</td>
+                            <td id="t_o_id_12"></td>
+                            <td id="t_o_n_12"></td>
+                            <td id="s_n_12"></td>
+                        </tr>
+                        <tr id="t_13">
+                            <td id="t_id_13">113</td>
+                            <td id="t_o_id_13"></td>
+                            <td id="t_o_n_13"></td>
+                            <td id="s_n_13"></td>
+                        </tr>
+                        <tr id="t_14">
+                            <td id="t_id_14">114</td>
+                            <td id="t_o_id_14"></td>
+                            <td id="t_o_n_14"></td>
+                            <td id="s_n_14"></td>
+                        </tr>
+                        <tr id="t_15">
+                            <td id="t_id_15">115</td>
+                            <td id="t_o_id_15"></td>
+                            <td id="t_o_n_15"></td>
+                            <td id="s_n_15"></td>
+                        </tr>
+                        <tr id="t_16">
+                            <td id="t_id_16">116</td>
+                            <td id="t_o_id_16"></td>
+                            <td id="t_o_n_16"></td>
+                            <td id="s_n_16"></td>
+                        </tr>
+                        <tr id="t_17">
+                            <td id="t_id_17">117</td>
+                            <td id="t_o_id_17"></td>
+                            <td id="t_o_n_17"></td>
+                            <td id="s_n_17"></td>
+                        </tr>
+                        <tr id="t_18">
+                            <td id="t_id_18">118</td>
+                            <td id="t_o_id_18"></td>
+                            <td id="t_o_n_18"></td>
+                            <td id="s_n_18"></td>
+                        </tr>
+                        <tr id="t_19">
+                            <td id="t_id_19">119</td>
+                            <td id="t_o_id_19"></td>
+                            <td id="t_o_n_19"></td>
+                            <td id="s_n_19"></td>
+                        </tr>
+                        <tr id="t_20">
+                            <td id="t_id_20">120</td>
+                            <td id="t_o_id_20"></td>
+                            <td id="t_o_n_20"></td>
+                            <td id="s_n_20"></td>
+                        </tr>
+                        <tr id="t_21">
+                            <td id="t_id_21">121</td>
+                            <td id="t_o_id_21"></td>
+                            <td id="t_o_n_21"></td>
+                            <td id="s_n_21"></td>
+                        </tr>
+                        <tr id="t_22">
+                            <td id="t_id_22">122</td>
+                            <td id="t_o_id_22"></td>
+                            <td id="t_o_n_22"></td>
+                            <td id="s_n_22"></td>
+                        </tr>
+                        <tr id="t_23">
+                            <td id="t_id_23">123</td>
+                            <td id="t_o_id_23"></td>
+                            <td id="t_o_n_23"></td>
+                            <td id="s_n_23"></td>
+                        </tr>
+                        <tr id="t_24">
+                            <td id="t_id_24">124</td>
+                            <td id="t_o_id_24"></td>
+                            <td id="t_o_n_24"></td>
+                            <td id="s_n_24"></td>
+                        </tr>
+                        <tr id="t_25">
+                            <td id="t_id_25">125</td>
+                            <td id="t_o_id_25"></td>
+                            <td id="t_o_n_25"></td>
+                            <td id="s_n_25"></td>
+                        </tr>
+                        <tr id="t_26">
+                            <td id="t_id_26">126</td>
+                            <td id="t_o_id_26"></td>
+                            <td id="t_o_n_26"></td>
+                            <td id="s_n_26"></td>
+                        </tr>
+                        <tr id="t_27">
+                            <td id="t_id_27">127</td>
+                            <td id="t_o_id_27"></td>
+                            <td id="t_o_n_27"></td>
+                            <td id="s_n_27"></td>
+                        </tr>
+                        <tr id="t_28">
+                            <td id="t_id_28">128</td>
+                            <td id="t_o_id_28"></td>
+                            <td id="t_o_n_28"></td>
+                            <td id="s_n_28"></td>
+                        </tr>
+                        <tr id="t_29">
+                            <td id="t_id_29">129</td>
+                            <td id="t_o_id_29"></td>
+                            <td id="t_o_n_29"></td>
+                            <td id="s_n_29"></td>
+                        </tr>
+                        <tr id="t_30">
+                            <td id="t_id_30">130</td>
+                            <td id="t_o_id_30"></td>
+                            <td id="t_o_n_30"></td>
+                            <td id="s_n_30"></td>
+                        </tr>
+                        <tr id="t_31">
+                            <td id="t_id_31">131</td>
+                            <td id="t_o_id_31"></td>
+                            <td id="t_o_n_31"></td>
+                            <td id="s_n_31"></td>
+                        </tr>
+                        <tr id="t_32">
+                            <td id="t_id_32">132</td>
+                            <td id="t_o_id_32"></td>
+                            <td id="t_o_n_32"></td>
+                            <td id="s_n_32"></td>
+                        </tr>
+                        <tr id="t_33">
+                            <td id="t_id_33">133</td>
+                            <td id="t_o_id_33"></td>
+                            <td id="t_o_n_33"></td>
+                            <td id="s_n_33"></td>
+                        </tr>
+                        <tr id="t_34">
+                            <td id="t_id_34">134</td>
+                            <td id="t_o_id_34"></td>
+                            <td id="t_o_n_34"></td>
+                            <td id="s_n_34"></td>
+                        </tr>
+                        <tr id="t_35">
+                            <td id="t_id_35">135</td>
+                            <td id="t_o_id_35"></td>
+                            <td id="t_o_n_35"></td>
+                            <td id="s_n_35"></td>
+                        </tr>
+                        <tr id="t_36">
+                            <td id="t_id_36">136</td>
+                            <td id="t_o_id_36"></td>
+                            <td id="t_o_n_36"></td>
+                            <td id="s_n_36"></td>
+                        </tr>
+                        <tr id="t_37">
+                            <td id="t_id_37">137</td>
+                            <td id="t_o_id_37"></td>
+                            <td id="t_o_n_37"></td>
+                            <td id="s_n_37"></td>
+                        </tr>
+                        <tr id="t_38">
+                            <td id="t_id_38">138</td>
+                            <td id="t_o_id_38"></td>
+                            <td id="t_o_n_38"></td>
+                            <td id="s_n_38"></td>
+                        </tr>
+                        <tr id="t_39">
+                            <td id="t_id_39">139</td>
+                            <td id="t_o_id_39"></td>
+                            <td id="t_o_n_39"></td>
+                            <td id="s_n_39"></td>
+                        </tr>
+                        <tr id="t_40">
+                            <td id="t_id_40">140</td>
+                            <td id="t_o_id_40"></td>
+                            <td id="t_o_n_40"></td>
+                            <td id="s_n_40"></td>
+                        </tr>
+                        <tr id="t_41">
+                            <td id="t_id_41">141</td>
+                            <td id="t_o_id_41"></td>
+                            <td id="t_o_n_41"></td>
+                            <td id="s_n_41"></td>
+                        </tr>
+                        <tr id="t_42">
+                            <td id="t_id_42">142</td>
+                            <td id="t_o_id_42"></td>
+                            <td id="t_o_n_42"></td>
+                            <td id="s_n_42"></td>
+                        </tr>
+                        <tr id="t_43">
+                            <td id="t_id_43">143</td>
+                            <td id="t_o_id_43"></td>
+                            <td id="t_o_n_43"></td>
+                            <td id="s_n_43"></td>
+                        </tr>
+                        <tr id="t_44">
+                            <td id="t_id_44">144</td>
+                            <td id="t_o_id_44"></td>
+                            <td id="t_o_n_44"></td>
+                            <td id="s_n_44"></td>
+                        </tr>
+                        <tr id="t_45">
+                            <td id="t_id_45">145</td>
+                            <td id="t_o_id_45"></td>
+                            <td id="t_o_n_45"></td>
+                            <td id="s_n_45"></td>
+                        </tr>
+                        <tr id="t_46">
+                            <td id="t_id_46">146</td>
+                            <td id="t_o_id_46"></td>
+                            <td id="t_o_n_46"></td>
+                            <td id="s_n_46"></td>
+                        </tr>
+                        <tr id="t_47">
+                            <td id="t_id_47">147</td>
+                            <td id="t_o_id_47"></td>
+                            <td id="t_o_n_47"></td>
+                            <td id="s_n_47"></td>
+                        </tr>
+                        <tr id="t_48">
+                            <td id="t_id_48">148</td>
+                            <td id="t_o_id_48"></td>
+                            <td id="t_o_n_48"></td>
+                            <td id="s_n_48"></td>
+                        </tr>
+                        <tr id="t_49">
+                            <td id="t_id_49">149</td>
+                            <td id="t_o_id_49"></td>
+                            <td id="t_o_n_49"></td>
+                            <td id="s_n_49"></td>
+                        </tr>
+                        <tr id="t_50">
+                            <td id="t_id_50">150</td>
+                            <td id="t_o_id_50"></td>
+                            <td id="t_o_n_50"></td>
+                            <td id="s_n_50"></td>
+                        </tr>
+                        <tr id="t_51">
+                            <td id="t_id_51">151</td>
+                            <td id="t_o_id_51"></td>
+                            <td id="t_o_n_51"></td>
+                            <td id="s_n_51"></td>
+                        </tr>
+                        <tr id="t_52">
+                            <td id="t_id_52">152</td>
+                            <td id="t_o_id_52"></td>
+                            <td id="t_o_n_52"></td>
+                            <td id="s_n_52"></td>
+                        </tr>
+                        <tr id="t_53">
+                            <td id="t_id_53">153</td>
+                            <td id="t_o_id_53"></td>
+                            <td id="t_o_n_53"></td>
+                            <td id="s_n_53"></td>
+                        </tr>
+                        <tr id="t_54">
+                            <td id="t_id_54">154</td>
+                            <td id="t_o_id_54"></td>
+                            <td id="t_o_n_54"></td>
+                            <td id="s_n_54"></td>
+                        </tr>
+                        <tr id="t_55">
+                            <td id="t_id_55">155</td>
+                            <td id="t_o_id_55"></td>
+                            <td id="t_o_n_55"></td>
+                            <td id="s_n_55"></td>
+                        </tr>
+                        <tr id="t_56">
+                            <td id="t_id_56">156</td>
+                            <td id="t_o_id_56"></td>
+                            <td id="t_o_n_56"></td>
+                            <td id="s_n_56"></td>
+                        </tr>
+                        <tr id="t_57">
+                            <td id="t_id_57">157</td>
+                            <td id="t_o_id_57"></td>
+                            <td id="t_o_n_57"></td>
+                            <td id="s_n_57"></td>
+                        </tr>
+                        <tr id="t_58">
+                            <td id="t_id_58">158</td>
+                            <td id="t_o_id_58"></td>
+                            <td id="t_o_n_58"></td>
+                            <td id="s_n_58"></td>
+                        </tr>
+                        <tr id="t_59">
+                            <td id="t_id_59">159</td>
+                            <td id="t_o_id_59"></td>
+                            <td id="t_o_n_59"></td>
+                            <td id="s_n_59"></td>
+                        </tr>
+                        <tr id="t_60">
+                            <td id="t_id_60">160</td>
+                            <td id="t_o_id_60"></td>
+                            <td id="t_o_n_60"></td>
+                            <td id="s_n_60"></td>
+                        </tr>
+                        <tr id="t_61">
+                            <td id="t_id_61">161</td>
+                            <td id="t_o_id_61"></td>
+                            <td id="t_o_n_61"></td>
+                            <td id="s_n_61"></td>
+                        </tr>
+                        <tr id="t_62">
+                            <td id="t_id_62">162</td>
+                            <td id="t_o_id_62"></td>
+                            <td id="t_o_n_62"></td>
+                            <td id="s_n_62"></td>
+                        </tr>
+                        <tr id="t_63">
+                            <td id="t_id_63">163</td>
+                            <td id="t_o_id_63"></td>
+                            <td id="t_o_n_63"></td>
+                            <td id="s_n_63"></td>
+                        </tr>
+                        <tr id="t_64">
+                            <td id="t_id_64">164</td>
+                            <td id="t_o_id_64"></td>
+                            <td id="t_o_n_64"></td>
+                            <td id="s_n_64"></td>
+                        </tr>
+                        <tr id="t_65">
+                            <td id="t_id_65">165</td>
+                            <td id="t_o_id_65"></td>
+                            <td id="t_o_n_65"></td>
+                            <td id="s_n_65"></td>
+                        </tr>
+                        <tr id="t_66">
+                            <td id="t_id_66">166</td>
+                            <td id="t_o_id_66"></td>
+                            <td id="t_o_n_66"></td>
+                            <td id="s_n_66"></td>
+                        </tr>
+                        <tr id="t_67">
+                            <td id="t_id_67">167</td>
+                            <td id="t_o_id_67"></td>
+                            <td id="t_o_n_67"></td>
+                            <td id="s_n_67"></td>
+                        </tr>
+                        <tr id="t_68">
+                            <td id="t_id_68">168</td>
+                            <td id="t_o_id_68"></td>
+                            <td id="t_o_n_68"></td>
+                            <td id="s_n_68"></td>
+                        </tr>
+                        <tr id="t_69">
+                            <td id="t_id_69">169</td>
+                            <td id="t_o_id_69"></td>
+                            <td id="t_o_n_69"></td>
+                            <td id="s_n_69"></td>
+                        </tr>
+                        <tr id="t_70">
+                            <td id="t_id_70">170</td>
+                            <td id="t_o_id_70"></td>
+                            <td id="t_o_n_70"></td>
+                            <td id="s_n_70"></td>
+                        </tr>
+                        <tr id="t_71">
+                            <td id="t_id_71">171</td>
+                            <td id="t_o_id_71"></td>
+                            <td id="t_o_n_71"></td>
+                            <td id="s_n_71"></td>
+                        </tr>
+                        <tr id="t_72">
+                            <td id="t_id_72">172</td>
+                            <td id="t_o_id_72"></td>
+                            <td id="t_o_n_72"></td>
+                            <td id="s_n_72"></td>
+                        </tr>
+                        <tr id="t_73">
+                            <td id="t_id_73">173</td>
+                            <td id="t_o_id_73"></td>
+                            <td id="t_o_n_73"></td>
+                            <td id="s_n_73"></td>
+                        </tr>
+                        <tr id="t_74">
+                            <td id="t_id_74">174</td>
+                            <td id="t_o_id_74"></td>
+                            <td id="t_o_n_74"></td>
+                            <td id="s_n_74"></td>
+                        </tr>
+                        <tr id="t_75">
+                            <td id="t_id_75">175</td>
+                            <td id="t_o_id_75"></td>
+                            <td id="t_o_n_75"></td>
+                            <td id="s_n_75"></td>
+                        </tr>
+                        <tr id="t_76">
+                            <td id="t_id_76">176</td>
+                            <td id="t_o_id_76"></td>
+                            <td id="t_o_n_76"></td>
+                            <td id="s_n_76"></td>
+                        </tr>
+                        <tr id="t_77">
+                            <td id="t_id_77">177</td>
+                            <td id="t_o_id_77"></td>
+                            <td id="t_o_n_77"></td>
+                            <td id="s_n_77"></td>
+                        </tr>
+                        <tr id="t_78">
+                            <td id="t_id_78">178</td>
+                            <td id="t_o_id_78"></td>
+                            <td id="t_o_n_78"></td>
+                            <td id="s_n_78"></td>
+                        </tr>
+                        <tr id="t_79">
+                            <td id="t_id_79">179</td>
+                            <td id="t_o_id_79"></td>
+                            <td id="t_o_n_79"></td>
+                            <td id="s_n_79"></td>
+                        </tr>
+                        <tr id="t_80">
+                            <td id="t_id_80">180</td>
+                            <td id="t_o_id_80"></td>
+                            <td id="t_o_n_80"></td>
+                            <td id="s_n_80"></td>
+                        </tr>
+                        <tr id="t_81">
+                            <td id="t_id_81">181</td>
+                            <td id="t_o_id_81"></td>
+                            <td id="t_o_n_81"></td>
+                            <td id="s_n_81"></td>
+                        </tr>
+                        <tr id="t_82">
+                            <td id="t_id_82">182</td>
+                            <td id="t_o_id_82"></td>
+                            <td id="t_o_n_82"></td>
+                            <td id="s_n_82"></td>
+                        </tr>
+                        <tr id="t_83">
+                            <td id="t_id_83">183</td>
+                            <td id="t_o_id_83"></td>
+                            <td id="t_o_n_83"></td>
+                            <td id="s_n_83"></td>
+                        </tr>
+                        <tr id="t_84">
+                            <td id="t_id_84">184</td>
+                            <td id="t_o_id_84"></td>
+                            <td id="t_o_n_84"></td>
+                            <td id="s_n_84"></td>
+                        </tr>
+                        <tr id="t_85">
+                            <td id="t_id_85">185</td>
+                            <td id="t_o_id_85"></td>
+                            <td id="t_o_n_85"></td>
+                            <td id="s_n_85"></td>
+                        </tr>
+                        <tr id="t_86">
+                            <td id="t_id_86">186</td>
+                            <td id="t_o_id_86"></td>
+                            <td id="t_o_n_86"></td>
+                            <td id="s_n_86"></td>
+                        </tr>
+                        <tr id="t_87">
+                            <td id="t_id_87">187</td>
+                            <td id="t_o_id_87"></td>
+                            <td id="t_o_n_87"></td>
+                            <td id="s_n_87"></td>
+                        </tr>
+                        <tr id="t_88">
+                            <td id="t_id_88">188</td>
+                            <td id="t_o_id_88"></td>
+                            <td id="t_o_n_88"></td>
+                            <td id="s_n_88"></td>
+                        </tr>
+                        <tr id="t_89">
+                            <td id="t_id_89">189</td>
+                            <td id="t_o_id_89"></td>
+                            <td id="t_o_n_89"></td>
+                            <td id="s_n_89"></td>
+                        </tr>
+                        <tr id="t_90">
+                            <td id="t_id_90">190</td>
+                            <td id="t_o_id_90"></td>
+                            <td id="t_o_n_90"></td>
+                            <td id="s_n_90"></td>
+                        </tr>
+                        <tr id="t_91">
+                            <td id="t_id_91">191</td>
+                            <td id="t_o_id_91"></td>
+                            <td id="t_o_n_91"></td>
+                            <td id="s_n_91"></td>
+                        </tr>
+                        <tr id="t_92">
+                            <td id="t_id_92">192</td>
+                            <td id="t_o_id_92"></td>
+                            <td id="t_o_n_92"></td>
+                            <td id="s_n_92"></td>
+                        </tr>
+                        <tr id="t_93">
+                            <td id="t_id_93">193</td>
+                            <td id="t_o_id_93"></td>
+                            <td id="t_o_n_93"></td>
+                            <td id="s_n_93"></td>
+                        </tr>
+                        <tr id="t_94">
+                            <td id="t_id_94">194</td>
+                            <td id="t_o_id_94"></td>
+                            <td id="t_o_n_94"></td>
+                            <td id="s_n_94"></td>
+                        </tr>
+                        <tr id="t_95">
+                            <td id="t_id_95">195</td>
+                            <td id="t_o_id_95"></td>
+                            <td id="t_o_n_95"></td>
+                            <td id="s_n_95"></td>
+                        </tr>
+                        <tr id="t_96">
+                            <td id="t_id_96">196</td>
+                            <td id="t_o_id_96"></td>
+                            <td id="t_o_n_96"></td>
+                            <td id="s_n_96"></td>
+                        </tr>
+                        <tr id="t_97">
+                            <td id="t_id_97">197</td>
+                            <td id="t_o_id_97"></td>
+                            <td id="t_o_n_97"></td>
+                            <td id="s_n_97"></td>
+                        </tr>
+                        <tr id="t_98">
+                            <td id="t_id_98">198</td>
+                            <td id="t_o_id_98"></td>
+                            <td id="t_o_n_98"></td>
+                            <td id="s_n_98"></td>
+                        </tr>
+                        <tr id="t_99">
+                            <td id="t_id_99">199</td>
+                            <td id="t_o_id_99"></td>
+                            <td id="t_o_n_99"></td>
+                            <td id="s_n_99"></td>
+                        </tr>
+                        <tr id="t_100">
+                            <td id="t_id_100">200</td>
+                            <td id="t_o_id_100"></td>
+                            <td id="t_o_n_100"></td>
+                            <td id="s_n_100"></td>
+                        </tr>
+                        <tr id="t_101">
+                            <td id="t_id_101">201</td>
+                            <td id="t_o_id_101"></td>
+                            <td id="t_o_n_101"></td>
+                            <td id="s_n_101"></td>
+                        </tr>
+                        <tr id="t_102">
+                            <td id="t_id_102">202</td>
+                            <td id="t_o_id_102"></td>
+                            <td id="t_o_n_102"></td>
+                            <td id="s_n_102"></td>
+                        </tr>
+                        <tr id="t_103">
+                            <td id="t_id_103">203</td>
+                            <td id="t_o_id_103"></td>
+                            <td id="t_o_n_103"></td>
+                            <td id="s_n_103"></td>
+                        </tr>
+                        <tr id="t_104">
+                            <td id="t_id_104">204</td>
+                            <td id="t_o_id_104"></td>
+                            <td id="t_o_n_104"></td>
+                            <td id="s_n_104"></td>
+                        </tr>
+                        <tr id="t_105">
+                            <td id="t_id_105">205</td>
+                            <td id="t_o_id_105"></td>
+                            <td id="t_o_n_105"></td>
+                            <td id="s_n_105"></td>
+                        </tr>
+                        <tr id="t_106">
+                            <td id="t_id_106">206</td>
+                            <td id="t_o_id_106"></td>
+                            <td id="t_o_n_106"></td>
+                            <td id="s_n_106"></td>
+                        </tr>
+                        <tr id="t_107">
+                            <td id="t_id_107">207</td>
+                            <td id="t_o_id_107"></td>
+                            <td id="t_o_n_107"></td>
+                            <td id="s_n_107"></td>
+                        </tr>
+                        <tr id="t_108">
+                            <td id="t_id_108">208</td>
+                            <td id="t_o_id_108"></td>
+                            <td id="t_o_n_108"></td>
+                            <td id="s_n_108"></td>
+                        </tr>
+                        <tr id="t_109">
+                            <td id="t_id_109">209</td>
+                            <td id="t_o_id_109"></td>
+                            <td id="t_o_n_109"></td>
+                            <td id="s_n_109"></td>
+                        </tr>
+                        <tr id="t_110">
+                            <td id="t_id_110">210</td>
+                            <td id="t_o_id_110"></td>
+                            <td id="t_o_n_110"></td>
+                            <td id="s_n_110"></td>
+                        </tr>
+                        <tr id="t_111">
+                            <td id="t_id_111">211</td>
+                            <td id="t_o_id_111"></td>
+                            <td id="t_o_n_111"></td>
+                            <td id="s_n_111"></td>
+                        </tr>
+                        <tr id="t_112">
+                            <td id="t_id_112">212</td>
+                            <td id="t_o_id_112"></td>
+                            <td id="t_o_n_112"></td>
+                            <td id="s_n_112"></td>
+                        </tr>
+                        <tr id="t_113">
+                            <td id="t_id_113">213</td>
+                            <td id="t_o_id_113"></td>
+                            <td id="t_o_n_113"></td>
+                            <td id="s_n_113"></td>
+                        </tr>
+                        <tr id="t_114">
+                            <td id="t_id_114">214</td>
+                            <td id="t_o_id_114"></td>
+                            <td id="t_o_n_114"></td>
+                            <td id="s_n_114"></td>
+                        </tr>
+                        <tr id="t_115">
+                            <td id="t_id_115">215</td>
+                            <td id="t_o_id_115"></td>
+                            <td id="t_o_n_115"></td>
+                            <td id="s_n_115"></td>
+                        </tr>
+                        <tr id="t_116">
+                            <td id="t_id_116">216</td>
+                            <td id="t_o_id_116"></td>
+                            <td id="t_o_n_116"></td>
+                            <td id="s_n_116"></td>
+                        </tr>
+                        <tr id="t_117">
+                            <td id="t_id_117">217</td>
+                            <td id="t_o_id_117"></td>
+                            <td id="t_o_n_117"></td>
+                            <td id="s_n_117"></td>
+                        </tr>
+                        <tr id="t_118">
+                            <td id="t_id_118">218</td>
+                            <td id="t_o_id_118"></td>
+                            <td id="t_o_n_118"></td>
+                            <td id="s_n_118"></td>
+                        </tr>
+                        <tr id="t_119">
+                            <td id="t_id_119">219</td>
+                            <td id="t_o_id_119"></td>
+                            <td id="t_o_n_119"></td>
+                            <td id="s_n_119"></td>
+                        </tr>
+                        <tr id="t_120">
+                            <td id="t_id_120">220</td>
+                            <td id="t_o_id_120"></td>
+                            <td id="t_o_n_120"></td>
+                            <td id="s_n_120"></td>
+                        </tr>
+                        <tr id="t_121">
+                            <td id="t_id_121">221</td>
+                            <td id="t_o_id_121"></td>
+                            <td id="t_o_n_121"></td>
+                            <td id="s_n_121"></td>
+                        </tr>
+                        <tr id="t_122">
+                            <td id="t_id_122">222</td>
+                            <td id="t_o_id_122"></td>
+                            <td id="t_o_n_122"></td>
+                            <td id="s_n_122"></td>
+                        </tr>
+                        <tr id="t_123">
+                            <td id="t_id_123">223</td>
+                            <td id="t_o_id_123"></td>
+                            <td id="t_o_n_123"></td>
+                            <td id="s_n_123"></td>
+                        </tr>
+                        <tr id="t_124">
+                            <td id="t_id_124">224</td>
+                            <td id="t_o_id_124"></td>
+                            <td id="t_o_n_124"></td>
+                            <td id="s_n_124"></td>
+                        </tr>
+                        <tr id="t_125">
+                            <td id="t_id_125">225</td>
+                            <td id="t_o_id_125"></td>
+                            <td id="t_o_n_125"></td>
+                            <td id="s_n_125"></td>
+                        </tr>
+                        <tr id="t_126">
+                            <td id="t_id_126">226</td>
+                            <td id="t_o_id_126"></td>
+                            <td id="t_o_n_126"></td>
+                            <td id="s_n_126"></td>
+                        </tr>
+                        <tr id="t_127">
+                            <td id="t_id_127">227</td>
+                            <td id="t_o_id_127"></td>
+                            <td id="t_o_n_127"></td>
+                            <td id="s_n_127"></td>
+                        </tr>
+                        <tr id="t_128">
+                            <td id="t_id_128">228</td>
+                            <td id="t_o_id_128"></td>
+                            <td id="t_o_n_128"></td>
+                            <td id="s_n_128"></td>
+                        </tr>
+                        <tr id="t_129">
+                            <td id="t_id_129">229</td>
+                            <td id="t_o_id_129"></td>
+                            <td id="t_o_n_129"></td>
+                            <td id="s_n_129"></td>
+                        </tr>
+                        <tr id="t_130">
+                            <td id="t_id_130">230</td>
+                            <td id="t_o_id_130"></td>
+                            <td id="t_o_n_130"></td>
+                            <td id="s_n_130"></td>
+                        </tr>
+                        <tr id="t_131">
+                            <td id="t_id_131">231</td>
+                            <td id="t_o_id_131"></td>
+                            <td id="t_o_n_131"></td>
+                            <td id="s_n_131"></td>
+                        </tr>
+                        <tr id="t_132">
+                            <td id="t_id_132">232</td>
+                            <td id="t_o_id_132"></td>
+                            <td id="t_o_n_132"></td>
+                            <td id="s_n_132"></td>
+                        </tr>
+                        <tr id="t_133">
+                            <td id="t_id_133">234</td>
+                            <td id="t_o_id_133"></td>
+                            <td id="t_o_n_133"></td>
+                            <td id="s_n_133"></td>
+                        </tr>
+                        <tr id="t_134">
+                            <td id="t_id_134">234</td>
+                            <td id="t_o_id_134"></td>
+                            <td id="t_o_n_134"></td>
+                            <td id="s_n_134"></td>
+                        </tr>
+                        <tr id="t_135">
+                            <td id="t_id_135">235</td>
+                            <td id="t_o_id_135"></td>
+                            <td id="t_o_n_135"></td>
+                            <td id="s_n_135"></td>
+                        </tr>
+                        <tr id="t_136">
+                            <td id="t_id_136">236</td>
+                            <td id="t_o_id_136"></td>
+                            <td id="t_o_n_136"></td>
+                            <td id="s_n_136"></td>
+                        </tr>
+                        <tr id="t_137">
+                            <td id="t_id_137">237</td>
+                            <td id="t_o_id_137"></td>
+                            <td id="t_o_n_137"></td>
+                            <td id="s_n_137"></td>
+                        </tr>
+                        <tr id="t_138">
+                            <td id="t_id_138">238</td>
+                            <td id="t_o_id_138"></td>
+                            <td id="t_o_n_138"></td>
+                            <td id="s_n_138"></td>
+                        </tr>
+                        <tr id="t_139">
+                            <td id="t_id_139">239</td>
+                            <td id="t_o_id_139"></td>
+                            <td id="t_o_n_139"></td>
+                            <td id="s_n_139"></td>
+                        </tr>
+                        <tr id="t_140">
+                            <td id="t_id_140">240</td>
+                            <td id="t_o_id_140"></td>
+                            <td id="t_o_n_140"></td>
+                            <td id="s_n_140"></td>
+                        </tr>
+                        <tr id="t_141">
+                            <td id="t_id_141">241</td>
+                            <td id="t_o_id_141"></td>
+                            <td id="t_o_n_141"></td>
+                            <td id="s_n_141"></td>
+                        </tr>
+                        <tr id="t_142">
+                            <td id="t_id_142">242</td>
+                            <td id="t_o_id_142"></td>
+                            <td id="t_o_n_142"></td>
+                            <td id="s_n_142"></td>
+                        </tr>
+                        <tr id="t_143">
+                            <td id="t_id_143">243</td>
+                            <td id="t_o_id_143"></td>
+                            <td id="t_o_n_143"></td>
+                            <td id="s_n_143"></td>
+                        </tr>
+                        <tr id="t_144">
+                            <td id="t_id_144">244</td>
+                            <td id="t_o_id_144"></td>
+                            <td id="t_o_n_144"></td>
+                            <td id="s_n_144"></td>
+                        </tr>
+                        <tr id="t_145">
+                            <td id="t_id_145">245</td>
+                            <td id="t_o_id_145"></td>
+                            <td id="t_o_n_145"></td>
+                            <td id="s_n_145"></td>
+                        </tr>
+                        <tr id="t_146">
+                            <td id="t_id_146">246</td>
+                            <td id="t_o_id_146"></td>
+                            <td id="t_o_n_146"></td>
+                            <td id="s_n_146"></td>
+                        </tr>
+                        <tr id="t_147">
+                            <td id="t_id_147">247</td>
+                            <td id="t_o_id_147"></td>
+                            <td id="t_o_n_147"></td>
+                            <td id="s_n_147"></td>
+                        </tr>
+                        <tr id="t_148">
+                            <td id="t_id_148">248</td>
+                            <td id="t_o_id_148"></td>
+                            <td id="t_o_n_148"></td>
+                            <td id="s_n_148"></td>
+                        </tr>
+                        <tr id="t_149">
+                            <td id="t_id_149">249</td>
+                            <td id="t_o_id_149"></td>
+                            <td id="t_o_n_149"></td>
+                            <td id="s_n_149"></td>
+                        </tr>
+                        <tr id="t_150">
+                            <td id="t_id_150">250</td>
+                            <td id="t_o_id_150"></td>
+                            <td id="t_o_n_150"></td>
+                            <td id="s_n_150"></td>
+                        </tr>
+                    </table>
+                </center>
+            </div>
+        </center>
+
+
+
+        <div id="Sell_a_ticket" class="modal">
+            <div class="modal-content animate">
+                <div class="box" style="background-color: rgba(0,0,0,0.9);">
+                    <label style="color: white; letter-spacing: 2px;padding: 14px 40px;">Sell a ticket</label>
+                    <input type="number" placeholder="Ticket NO" id="ticket_no" onclick="clr_err()">
+                    <input type="number" placeholder="NSBM Id" id="nsbm_id" onclick="clr_err()">
+                    <input type="text" placeholder="Name" id="name" onclick="clr_err()">
+                    <span id="error"></span>
+                    <span id="Success"></span>
+                    <input type="submit" value="Sell" onclick="Sell_a_ticket()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	    <script>
+  			AOS.init();
+		</script>
+
+    <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDYy5L5iZKkaUAUD5D71QcMx0eNBshLdJw",
+            authDomain: "spectra2k19-b443d.firebaseapp.com",
+            databaseURL: "https://spectra2k19-b443d.firebaseio.com",
+            projectId: "spectra2k19-b443d",
+            storageBucket: "",
+            messagingSenderId: "286650958669",
+            appId: "1:286650958669:web:8784a41f6434caee226d04"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script src="js_index.js"></script>
+    
+	
+</body>
+
+</html>
