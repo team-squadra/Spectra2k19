@@ -2,9 +2,19 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background: white;
+    background: url(bg.jpg) no-repeat;
+    background-size: cover;
+    /*animation: anim 25s linear infinite;*/
 }
 
+/*@keyframes anim {
+  70%{
+    transform: scale(2);
+  }
+  100%{
+    transform: scale(1);
+  }
+}*/
 .box {
     width: 300px;
     padding: 20px;
@@ -16,6 +26,7 @@ body {
     text-align: center;
     transition: 0.25s;
     border-radius: 20px;
+    background-color: rgba(0,0,0,0.8);
 }
 
 .Spectra {
@@ -39,9 +50,10 @@ body {
     padding: 14px 10px;
     width: 200px;
     outline: none;
-    color: black;
+    color: white;
     border-radius: 24px;
     transition: 0.25s;
+    letter-spacing: 2px;
 }
 
  ::placeholder {
@@ -78,10 +90,11 @@ body {
     border: 2px solid #2ecc71;
     padding: 14px 40px;
     outline: none;
-    color: black;
+    color: white;
     border-radius: 24px;
     transition: 0.25s;
     cursor: pointer;
+    letter-spacing: 2px;
 }
 
 .box input[type="submit"]:hover,

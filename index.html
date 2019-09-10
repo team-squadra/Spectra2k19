@@ -8,6 +8,7 @@
     <title>Spectra2k19</title>
     <link rel="stylesheet" href="css_index.css">
     <link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 
@@ -15,8 +16,8 @@
 <body>
 
     <div class="box" id="login_div">
-        <img src="d.png" style="width: 150px;height: 150px;" ><br>
-        <label class="Spectra">Spectra</label>
+        <img src="d.png" style="width: 150px;height: 150px;" data-aos="flip-down" data-aos-duration="1500"><br>
+        <label class="Spectra" data-aos="zoom-in-right" data-aos-duration="2000">Spectra</label>
         <input type="email" placeholder="Email" id="email_field">
         <input type="password" placeholder="Password" id="password_field">
         <input type="submit" value="Login" onclick="login()">
@@ -33,7 +34,7 @@
         </div>
 
 
-        <div id="user">
+        <div id="user" data-aos="fade-up" data-aos-anchor-placement="bottom-center">
             <table>
                 <tr>
                     <td>
@@ -990,13 +991,12 @@
             </div>
         </div>
 
-
-
-
-
-
-
     </div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+	    <script>
+  			AOS.init();
+		</script>
 
     <script src="https://www.gstatic.com/firebasejs/5.9.0/firebase.js"></script>
     <script>
@@ -1014,7 +1014,8 @@
     </script>
 
     <script src="js_index.js"></script>
-
+    
+	
 </body>
 
 </html>
