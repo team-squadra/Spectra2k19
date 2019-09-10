@@ -152,25 +152,26 @@ body {
     border-collapse: collapse;
     max-width: 400px;
     margin: 20px;
-    background: white;
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
 }
 
 #tickets td,
 #tickets th {
-    border: 1px solid SeaGreen;
+    border: 1px solid transparent;
     padding: 10px;
-    color: #888;
+    color: white;
 }
 
 #tickets tr:hover {
-    background-color: #ddd;
+    background-color: #2ecc71;
 }
 
 #tickets th {
     padding-top: 12px;
     padding-bottom: 12px;
-    text-align: left;
-    background-color: #2ecc71;
+    text-align: center;
+    background-color:  rgba(0, 0, 0, 0.5);
     color: white;
 }
 
