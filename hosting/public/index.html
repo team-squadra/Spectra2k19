@@ -423,7 +423,7 @@
         </center>
 
         <center>
-            <div style="height: 400px;overflow: auto;">
+            <div style="max-height: 400px;overflow: auto;">
                 <center>
                     <h3 style="color: white;">Buyer table</h3>
                     <table id="tickets">
@@ -1338,8 +1338,9 @@
             </div>
         </center>
 
+
         <center>
-            <div style="height: 400px;overflow: auto;">
+            <div style="max-height: 400px;overflow: auto;">
                 <center>
                     <h3 style="color: white;">Seller table</h3>
                     <table id="tickets">
@@ -1496,11 +1497,20 @@
         var t_o_id_array = [];
         var t_o_n_array = [];
         var s_n_array = [];
+        var seller_array = [];
+        var seller_n_array = [];
+        var seller_c_array = [];
+        var seller_m_array = [];
         var hh = 0;
         var kk = 0;
+        var seller_id_index_array = [];
+        seller_id_index_array[0] = "null";
+
 
         declare_arrays();
         Arrange_table();
+        load_seller_id();
+        Arrange_seller_table();
 
 
         firebase.auth().onAuthStateChanged(function (user) {
@@ -1521,10 +1531,15 @@
                         document.getElementById("user_id").innerText = user_uid;
                         firebase.database().ref().child("Sellers").child(user_uid).child("user_tickets_count").set(0);
                         firebase.database().ref().child("Sellers").child(user_uid).child("user_money").set(0);
+
                         for (let index = 1; index < 151; index++) {
                             load_data(index);
                         }
+                        for (var indexx = 1; indexx < 21; indexx++) {
+                            load_seller_data(indexx);
+                        }
                     });
+
 
                 }
             } else {
@@ -1556,9 +1571,6 @@
             firebase.auth().signOut();
         }
 
-        function searchHalls() {
-            alert("adasdaswd");
-        }
 
         // Get the modal
         var modal = document.getElementById('Sell_a_ticket');
@@ -1568,7 +1580,6 @@
             if (event.target == modal) {
                 modal.style.display = "none";
                 document.getElementById("error").innerText = "";
-
             }
         }
 
@@ -1608,7 +1619,6 @@
                     else {
                         var firebaseRef = firebase.database().ref();
                         var seller = document.getElementById("user_name").innerText;
-
 
                         firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("buyer_nsbm_id").set(buyer_nsbm_id);
                         firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("buyer_name").set(buyer_name);
@@ -1675,17 +1685,48 @@
 
         }
 
-        for (let seindex = 1; seindex < 151; seindex++) {
-            load_seller_data(seindex);
+        function load_seller_id() {
+
+            for (let seller_id_index = 1; seller_id_index < 21; seller_id_index++) {
+
+                var seller_id = firebase.database().ref().child("Sellers_id").child(seller_id_index);
+                seller_id.on('value', snap => {
+                    var seller_id = snap.val();
+                    seller_id_index_array[seller_id_index] = seller_id;
+                });
+            }
         }
 
-        function load_seller_data(se) {
-            var t_o_id = firebase.database().ref().child("tickets").child(se).child("buyer_nsbm_id");
-            t_o_id.on('value', snap => {
-                var t_o_id = snap.val();
-                document.getElementById(t_o_id_array[se]).innerText = t_o_id;
-                Arrange_table();
-            });
+        function load_seller_data(seller_data_index) {
+
+            if (seller_id_index_array[seller_data_index] != null) {
+                var seller_n = firebase.database().ref().child("Sellers").child(seller_id_index_array[seller_data_index]).child("username");
+                seller_n.on('value', snap => {
+                    var seller_n = snap.val();
+                    document.getElementById(seller_n_array[seller_data_index]).innerText = seller_n;
+                    Arrange_seller_table();
+                });
+
+                var seller_c = firebase.database().ref().child("Sellers").child(seller_id_index_array[seller_data_index]).child("user_tickets_count");
+                seller_c.on('value', snap => {
+                    var seller_c = snap.val();
+                    document.getElementById(seller_c_array[seller_data_index]).innerText = seller_c;
+                });
+
+                var seller_m = firebase.database().ref().child("Sellers").child(seller_id_index_array[seller_data_index]).child("user_money");
+                seller_m.on('value', snap => {
+                    var seller_m = snap.val();
+                    document.getElementById(seller_m_array[seller_data_index]).innerText = seller_m;
+                });
+
+            }
+            else {
+
+            }
+
+
+
+
         }
 
         function declare_arrays() {
@@ -1774,6 +1815,56 @@
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            seller_array[0] = "null"; seller_array[1] = "seller_1"; seller_array[2] = "seller_2"; seller_array[3] = "seller_3"; seller_array[4] = "seller_4"; seller_array[5] = "seller_5"; seller_array[6] = "seller_6"; seller_array[7] = "seller_7"; seller_array[8] = "seller_8"; seller_array[9] = "seller_9";
+            seller_array[10] = "seller_10"; seller_array[11] = "seller_11"; seller_array[12] = "seller_12"; seller_array[13] = "seller_13"; seller_array[14] = "seller_14"; seller_array[15] = "seller_15"; seller_array[16] = "seller_16"; seller_array[17] = "seller_17"; seller_array[18] = "seller_18"; seller_array[19] = "seller_19";
+            seller_array[20] = "seller_20";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            seller_n_array[0] = "null"; seller_n_array[1] = "seller_n_1"; seller_n_array[2] = "seller_n_2"; seller_n_array[3] = "seller_n_3"; seller_n_array[4] = "seller_n_4"; seller_n_array[5] = "seller_n_5"; seller_n_array[6] = "seller_n_6"; seller_n_array[7] = "seller_n_7"; seller_n_array[8] = "seller_n_8"; seller_n_array[9] = "seller_n_9";
+            seller_n_array[10] = "seller_n_10"; seller_n_array[11] = "seller_n_11"; seller_n_array[12] = "seller_n_12"; seller_n_array[13] = "seller_n_13"; seller_n_array[14] = "seller_n_14"; seller_n_array[15] = "seller_n_15"; seller_n_array[16] = "seller_n_16"; seller_n_array[17] = "seller_n_17"; seller_n_array[18] = "seller_n_18"; seller_n_array[19] = "seller_n_19";
+            seller_n_array[20] = "seller_n_20";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            seller_c_array[0] = "null"; seller_c_array[1] = "seller_c_1"; seller_c_array[2] = "seller_c_2"; seller_c_array[3] = "seller_c_3"; seller_c_array[4] = "seller_c_4"; seller_c_array[5] = "seller_c_5"; seller_c_array[6] = "seller_c_6"; seller_c_array[7] = "seller_c_7"; seller_c_array[8] = "seller_c_8"; seller_c_array[9] = "seller_c_9";
+            seller_c_array[10] = "seller_c_10"; seller_c_array[11] = "seller_c_11"; seller_c_array[12] = "seller_c_12"; seller_c_array[13] = "seller_c_13"; seller_c_array[14] = "seller_c_14"; seller_c_array[15] = "seller_c_15"; seller_c_array[16] = "seller_c_16"; seller_c_array[17] = "seller_c_17"; seller_c_array[18] = "seller_c_18"; seller_c_array[19] = "seller_c_19";
+            seller_c_array[20] = "seller_c_20";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            seller_m_array[0] = "null"; seller_m_array[1] = "seller_m_1"; seller_m_array[2] = "seller_m_2"; seller_m_array[3] = "seller_m_3"; seller_m_array[4] = "seller_m_4"; seller_m_array[5] = "seller_m_5"; seller_m_array[6] = "seller_m_6"; seller_m_array[7] = "seller_m_7"; seller_m_array[8] = "seller_m_8"; seller_m_array[9] = "seller_m_9";
+            seller_m_array[10] = "seller_m_10"; seller_m_array[11] = "seller_m_11"; seller_m_array[12] = "seller_m_12"; seller_m_array[13] = "seller_m_13"; seller_m_array[14] = "seller_m_14"; seller_m_array[15] = "seller_m_15"; seller_m_array[16] = "seller_m_16"; seller_m_array[17] = "seller_m_17"; seller_m_array[18] = "seller_m_18"; seller_m_array[19] = "seller_m_19";
+            seller_m_array[20] = "seller_m_20";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        }
+
+
+        function Arrange_seller_table() {
+
+            for (var j = 1; j < 21; j++) {
+                var txt_value = document.getElementById(seller_n_array[j]).innerText;
+
+                if (txt_value == "undefined" || txt_value == "null" || txt_value == "") {
+                    document.getElementById(seller_array[j]).style.display = 'none';
+                }
+                else {
+                    document.getElementById(seller_array[j]).style.display = '';
+
+                }
+            }
         }
 
         function Arrange_table() {
