@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <style type="text/css">
@@ -98,7 +99,8 @@
     }
 
     .box input[type="submit"],
-    #sell_btn {
+    #sell_btn,
+    button {
         border: 0;
         background: none;
         display: block;
@@ -114,13 +116,14 @@
         letter-spacing: 2px;
     }
 
-    #myInput {
+    .search_by {
         background-color: rgba(0, 0, 0, 0.6);
         color: white;
         letter-spacing: 2px;
     }
 
     .box input[type="submit"]:hover,
+    button:hover,
     #sell_btn:hover {
         background: #2ecc71;
         color: white;
@@ -170,14 +173,14 @@
         background-color: tomato;
     }
 
-    #tickets {
+    .table_css {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         max-width: 800px;
         margin: 20px;
         background-color: rgba(0, 0, 0, 0.4);
         text-align: center;
-        border-radius: 20px;
+        border-radius: 0px 0px 20px 20px;
     }
 
     /*#tickets th{
@@ -186,8 +189,8 @@
     /*#tickets td{
     border-radius: 20px;
 }*/
-    #tickets td,
-    #tickets th {
+    .table_css td,
+    .table_css th {
         border: 1px solid transparent;
         padding: 15px;
         color: white;
@@ -196,11 +199,11 @@
         /*font-family: 'Shadows Into Light', cursive;*/
     }
 
-    #tickets tr:hover {
+    .table_css tr:hover {
         background-color: #2ecc71;
     }
 
-    #tickets th {
+    .table_css th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: center;
@@ -208,19 +211,8 @@
         color: white;
     }
 
-    #t_count {
 
-        color: white;
-        font-family: 'Ubuntu', sans-serif;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    #emphty {
-        padding-right: 42px;
-    }
-
-    #myInput {
+    .search_by {
         background-image: url('sico.png');
         /* Add a search icon to input */
         background-position: 10px 12px;
@@ -233,24 +225,24 @@
         /* Increase font-size */
         padding: 12px 20px 12px 40px;
         /* Add some padding */
-        border: 3px solid #2ecc71;
+        border: 3px solid orange;
         /* Add a red border */
         border-radius: 17px 17px 17px 17px;
         /*make corners round*/
-        margin-bottom: 12px;
+        margin-bottom: 0px;
+        margin-top: 30px;
         /* Add some space below the input */
         transition: width 0.5s;
         /* transition time*/
-        margin-bottom: 1.5%;
         outline: none;
     }
 
-    #myInput:hover {
+    .search_by:hover {
         box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
         width: 40%;
     }
 
-    #myInput {
+    .search_by {
         -webkit-transition-timing-function: ease;
     }
 
@@ -352,6 +344,18 @@
         color: mediumseagreen;
         font-size: 15px;
     }
+
+    .fa {
+        margin-left: -12px;
+        margin-right: 8px;
+        /*<i class="fa fa-circle-o-notch fa-spin"></i>*/
+    }
+
+    #total_tickect_count {
+        font-family: 'Satisfy', cursive;
+        color: white;
+        font-size: 50px;
+    }
 </style>
 
 
@@ -363,7 +367,8 @@
         <label class="Spectra" data-aos="zoom-in-right" data-aos-duration="2000">Spectra</label>
         <input type="email" placeholder="Email" id="email_field">
         <input type="password" placeholder="Password" id="password_field">
-        <input type="submit" value="Login" onclick="login()">
+        <button onclick="login()"><i class="fa fa-refresh fa-spin" style="display: none;"
+                id="login_load"></i>login</button>
     </div>
 
 
@@ -376,6 +381,11 @@
             </div>
         </div>
 
+        <center>
+            <label id="total_tickect_count">0</label><br>
+            <label style="color: white;background-color: rgba(0, 0, 0, 0.4);padding: 10px; letter-spacing: 2px;">tickets
+                sold out</label><br>
+        </center>
 
         <div id="user" data-aos="fade-up" data-aos-anchor-placement="bottom-center">
             <table>
@@ -397,36 +407,20 @@
 
         <center>
             <button id="sell_btn" onclick="document.getElementById('Sell_a_ticket').style.display='block'"
-                style="border: 2px solid white;">
+                style="border: 2px solid white;margin-top: 40px; display: none;">
                 Sell a ticket
             </button>
         </center>
 
         <center>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for tickect number..">
-        </center>
-
-        <center>
-            <table>
-                <tr>
-                    <td id="t_count">ඔයා විකුණපු ගාන :</td>
-                    <td id="t_count">
-                        <p id="demo">0</p>
-                    </td>
-                    <td id="emphty"></td>
-                    <td id="t_count">ඔක්කොම විකුණපු ගාන :</td>
-                    <td id="t_count">
-                        <p id="demo2">0</p>
-                    </td>
-                </tr>
-            </table>
+            <input type="text" id="Search_tickect_number" onkeyup="Search_tickect_number()"
+                placeholder="Search for tickect number.." class="search_by">
         </center>
 
         <center>
             <div style="max-height: 400px;overflow: auto;">
                 <center>
-                    <h3 style="color: white;">Buyer table</h3>
-                    <table id="tickets">
+                    <table id="tickets" class="table_css">
                         <tr>
                             <th>Tickect NO</th>
                             <th>NSBM ID</th>
@@ -1340,10 +1334,14 @@
 
 
         <center>
+            <input type="text" id="Search_seller_name" onkeyup="Search_seller_name()" id="myInput"
+                placeholder="Search for Seller name.." class="search_by">
+        </center>
+
+        <center>
             <div style="max-height: 400px;overflow: auto;">
                 <center>
-                    <h3 style="color: white;">Seller table</h3>
-                    <table id="tickets">
+                    <table id="sellers" class="table_css">
                         <tr>
                             <th>Seller name</th>
                             <th>Tickets Count</th>
@@ -1458,9 +1456,10 @@
 
         <div id="Sell_a_ticket" class="modal">
             <div class="modal-content animate">
-                <div class="box" style="background-color: rgba(0,0,0,0.9);">
+                <div class="box" style="background-color:black;border: 2px solid white;">
                     <label style="color: white; letter-spacing: 2px;padding: 14px 40px;">Sell a ticket</label>
-                    <input type="number" placeholder="Ticket NO" id="ticket_no" onclick="clr_err()">
+                    <input type="number" placeholder="Ticket NO" id="ticket_no" onclick="clr_err()"
+                        style="margin-top: 40px;">
                     <input type="number" placeholder="NSBM Id" id="nsbm_id" onclick="clr_err()">
                     <input type="text" placeholder="Name" id="name" onclick="clr_err()">
                     <span id="error"></span>
@@ -1512,25 +1511,26 @@
         load_seller_id();
         Arrange_seller_table();
 
-
+        document.getElementById("login_load").style.display = '';
         firebase.auth().onAuthStateChanged(function (user) {
+
             if (user) {
                 // User is signed in.
                 var user = firebase.auth().currentUser;
 
                 if (user != null) {
 
+
                     var user_uid = user.uid;
                     document.getElementById('login_div').style.display = 'none'
                     document.getElementById('Home_div').style.display = 'block'
+                    document.getElementById("login_load").style.display = 'none';
 
-                    var Seller_name = firebase.database().ref().child("Sellers").child(user_uid).child("username");
+                    var Seller_name = firebase.database().ref().child("All_users").child(user_uid).child("user_name");
                     Seller_name.on('value', snap => {
                         var Seller_name = snap.val();
                         document.getElementById("user_name").innerText = Seller_name;
                         document.getElementById("user_id").innerText = user_uid;
-                        firebase.database().ref().child("Sellers").child(user_uid).child("user_tickets_count").set(0);
-                        firebase.database().ref().child("Sellers").child(user_uid).child("user_money").set(0);
 
                         for (let index = 1; index < 151; index++) {
                             load_data(index);
@@ -1540,18 +1540,32 @@
                         }
                     });
 
+                    var user_type = firebase.database().ref().child("All_users").child(user_uid).child("user_type");
+                    user_type.on('value', snap => {
+                        var user_type = snap.val();
+                        if (user_type == 'seller') {
+                            document.getElementById('sell_btn').style.display = '';
+                            firebase.database().ref().child("All_users").child(user_uid).child("user_tickets_count").set(0);
+                            firebase.database().ref().child("All_users").child(user_uid).child("user_money").set(0);
+                        }
+                        else if (user_type == 'user') {
+                            document.getElementById('sell_btn').style.display = 'none';
+                        }
+                    });
+
 
                 }
             } else {
                 // No user is signed in.
                 document.getElementById('login_div').style.display = 'block'
                 document.getElementById('Home_div').style.display = 'none'
+                document.getElementById("login_load").style.display = 'none';
             }
         });
 
 
         function login() {
-
+            document.getElementById("login_load").style.display = '';
             var userEmail = document.getElementById("email_field").value;
             var userPass = document.getElementById("password_field").value;
 
@@ -1561,7 +1575,7 @@
                 var errorMessage = error.message;
 
                 window.alert("Error : " + errorMessage);
-
+                document.getElementById("login_load").style.display = 'none';
                 // ...
             });
 
@@ -1587,6 +1601,7 @@
             document.getElementById("error").innerText = "";
             document.getElementById("Success").innerText = "";
         }
+
 
         function Sell_a_ticket() {
             var buyer_ticket_no = document.getElementById("ticket_no").value;
@@ -1668,16 +1683,16 @@
 
                 if (s_n != null) {
                     kk++;
-                    document.getElementById("demo2").innerText = kk;
+                    document.getElementById("total_tickect_count").innerText = kk;
                     firebase.database().ref().child("All_data").child("Total_ticket_count_sold").set(kk);
                     firebase.database().ref().child("All_data").child("Total_cash_count").set(kk * 2000);
                 }
 
                 if (s_n == current_user) {
                     hh++;
-                    document.getElementById("demo").innerText = hh;
-                    firebase.database().ref().child("Sellers").child(seller_id).child("user_tickets_count").set(hh);
-                    firebase.database().ref().child("Sellers").child(seller_id).child("user_money").set(hh * 2000);
+                    //document.getElementById("demo").innerText = hh;
+                    firebase.database().ref().child("All_users").child(seller_id).child("user_tickets_count").set(hh);
+                    firebase.database().ref().child("All_users").child(seller_id).child("user_money").set(hh * 2000);
                 }
                 Arrange_table();
             });
@@ -1700,20 +1715,20 @@
         function load_seller_data(seller_data_index) {
 
             if (seller_id_index_array[seller_data_index] != null) {
-                var seller_n = firebase.database().ref().child("Sellers").child(seller_id_index_array[seller_data_index]).child("username");
+                var seller_n = firebase.database().ref().child("All_users").child(seller_id_index_array[seller_data_index]).child("user_name");
                 seller_n.on('value', snap => {
                     var seller_n = snap.val();
                     document.getElementById(seller_n_array[seller_data_index]).innerText = seller_n;
                     Arrange_seller_table();
                 });
 
-                var seller_c = firebase.database().ref().child("Sellers").child(seller_id_index_array[seller_data_index]).child("user_tickets_count");
+                var seller_c = firebase.database().ref().child("All_users").child(seller_id_index_array[seller_data_index]).child("user_tickets_count");
                 seller_c.on('value', snap => {
                     var seller_c = snap.val();
                     document.getElementById(seller_c_array[seller_data_index]).innerText = seller_c;
                 });
 
-                var seller_m = firebase.database().ref().child("Sellers").child(seller_id_index_array[seller_data_index]).child("user_money");
+                var seller_m = firebase.database().ref().child("All_users").child(seller_id_index_array[seller_data_index]).child("user_money");
                 seller_m.on('value', snap => {
                     var seller_m = snap.val();
                     document.getElementById(seller_m_array[seller_data_index]).innerText = seller_m;
@@ -1882,16 +1897,42 @@
             }
         }
 
-        function myFunction() {
+        function Search_tickect_number() {
             var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("myInput");
-            var inputval = document.getElementById("myInput").value;
+            input = document.getElementById("Search_tickect_number");
+            var inputval = document.getElementById("Search_tickect_number").value;
             if (inputval == "") {
                 Arrange_table();
             }
             else {
                 filter = input.value.toUpperCase();
                 table = document.getElementById("tickets");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+        }
+
+        function Search_seller_name() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Search_seller_name");
+            var inputval = document.getElementById("Search_seller_name").value;
+            if (inputval == "") {
+                Arrange_seller_table();
+            }
+            else {
+                filter = input.value.toUpperCase();
+                table = document.getElementById("sellers");
                 tr = table.getElementsByTagName("tr");
                 for (i = 0; i < tr.length; i++) {
                     td = tr[i].getElementsByTagName("td")[0];
