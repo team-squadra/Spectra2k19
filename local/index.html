@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Satisfy&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <style type="text/css">
@@ -98,7 +99,8 @@
     }
 
     .box input[type="submit"],
-    #sell_btn {
+    #sell_btn,
+    .box button {
         border: 0;
         background: none;
         display: block;
@@ -114,13 +116,14 @@
         letter-spacing: 2px;
     }
 
-    #myInput {
+    .search_by {
         background-color: rgba(0, 0, 0, 0.6);
         color: white;
         letter-spacing: 2px;
     }
 
     .box input[type="submit"]:hover,
+    .box button:hover,
     #sell_btn:hover {
         background: #2ecc71;
         color: white;
@@ -170,14 +173,14 @@
         background-color: tomato;
     }
 
-    #tickets {
+    .table_css {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         border-collapse: collapse;
         max-width: 800px;
         margin: 20px;
         background-color: rgba(0, 0, 0, 0.4);
         text-align: center;
-        border-radius: 20px;
+        border-radius: 0px 0px 20px 20px;
     }
 
     /*#tickets th{
@@ -186,8 +189,8 @@
     /*#tickets td{
     border-radius: 20px;
 }*/
-    #tickets td,
-    #tickets th {
+    .table_css td,
+    .table_css th {
         border: 1px solid transparent;
         padding: 15px;
         color: white;
@@ -196,11 +199,27 @@
         /*font-family: 'Shadows Into Light', cursive;*/
     }
 
-    #tickets tr:hover {
+    .table_css button {
+        border: 0;
+        background: transparent;
+        display: block;
+        text-align: center;
+        border: 2px solid white;
+        padding: 14px 40px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: not-allowed;
+        letter-spacing: 2px;
+    }
+
+
+    .table_css tr:hover {
         background-color: #2ecc71;
     }
 
-    #tickets th {
+    .table_css th {
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: center;
@@ -208,19 +227,8 @@
         color: white;
     }
 
-    #t_count {
 
-        color: white;
-        font-family: 'Ubuntu', sans-serif;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    #emphty {
-        padding-right: 42px;
-    }
-
-    #myInput {
+    .search_by {
         background-image: url('sico.png');
         /* Add a search icon to input */
         background-position: 10px 12px;
@@ -233,24 +241,24 @@
         /* Increase font-size */
         padding: 12px 20px 12px 40px;
         /* Add some padding */
-        border: 3px solid #2ecc71;
+        border: 3px solid orange;
         /* Add a red border */
         border-radius: 17px 17px 17px 17px;
         /*make corners round*/
-        margin-bottom: 12px;
+        margin-bottom: 0px;
+        margin-top: 30px;
         /* Add some space below the input */
         transition: width 0.5s;
         /* transition time*/
-        margin-bottom: 1.5%;
         outline: none;
     }
 
-    #myInput:hover {
+    .search_by:hover {
         box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.4), 0 6px 20px 0 rgba(0, 0, 0, 0.25);
         width: 40%;
     }
 
-    #myInput {
+    .search_by {
         -webkit-transition-timing-function: ease;
     }
 
@@ -352,6 +360,24 @@
         color: mediumseagreen;
         font-size: 15px;
     }
+
+    .fa {
+        margin-left: -12px;
+        margin-right: 8px;
+        /*<i class="fa fa-circle-o-notch fa-spin"></i>*/
+    }
+
+    #total_tickect_count {
+        font-family: 'Satisfy', cursive;
+        color: white;
+        font-size: 50px;
+    }
+
+    #checked_in_count {
+        font-family: 'Satisfy', cursive;
+        color: white;
+        font-size: 50px;
+    }
 </style>
 
 
@@ -363,7 +389,8 @@
         <label class="Spectra" data-aos="zoom-in-right" data-aos-duration="2000">Spectra</label>
         <input type="email" placeholder="Email" id="email_field">
         <input type="password" placeholder="Password" id="password_field">
-        <input type="submit" value="Login" onclick="login()">
+        <button onclick="login()"><i class="fa fa-refresh fa-spin" style="display: none;"
+                id="login_load"></i>login</button>
     </div>
 
 
@@ -376,6 +403,18 @@
             </div>
         </div>
 
+        <center>
+            <label id="total_tickect_count">0</label><br>
+            <label
+                style="color: white;background-color: rgba(0, 0, 0, 0.4);padding: 10px; letter-spacing: 2px;margin-bottom: 30px;">tickets
+                sold out</label><br><br>
+        </center>
+
+        <center>
+            <label id="checked_in_count" style="display: none;">0</label><br>
+            <label style="color: white;background-color: rgba(0, 0, 0, 0.4);padding: 10px; letter-spacing: 2px;display: none;" id="checked_in_count_label">Checked
+                in</label><br><br>
+        </center>
 
         <div id="user" data-aos="fade-up" data-aos-anchor-placement="bottom-center">
             <table>
@@ -397,952 +436,1093 @@
 
         <center>
             <button id="sell_btn" onclick="document.getElementById('Sell_a_ticket').style.display='block'"
-                style="border: 2px solid white;">
+                style="border: 2px solid white;margin-top: 40px; display: none;">
                 Sell a ticket
             </button>
         </center>
 
         <center>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for tickect number..">
+            <input type="text" id="Search_tickect_number" onkeyup="Search_tickect_number()"
+                placeholder="Search for tickect number.." class="search_by">
         </center>
 
         <center>
-            <table>
-                <tr>
-                    <td id="t_count">ඔයා විකුණපු ගාන :</td>
-                    <td id="t_count">
-                        <p id="demo">0</p>
-                    </td>
-                    <td id="emphty"></td>
-                    <td id="t_count">ඔක්කොම විකුණපු ගාන :</td>
-                    <td id="t_count">
-                        <p id="demo2">0</p>
-                    </td>
-                </tr>
-            </table>
-        </center>
-
-        <center>
-            <div style="height: 400px;overflow: auto;">
+            <div style="max-height: 400px;overflow: auto;">
                 <center>
-                    <h3 style="color: white;">Buyer table</h3>
-                    <table id="tickets">
+                    <table id="tickets" class="table_css">
                         <tr>
                             <th>Tickect NO</th>
                             <th>NSBM ID</th>
                             <th>Owner</th>
                             <th>Seller</th>
+                            <th id="th_Check_in" style="display: none;">Check in</th>
                         </tr>
                         <tr id="t_1">
                             <td id="t_id_1">101</td>
                             <td id="t_o_id_1"></td>
                             <td id="t_o_n_1"></td>
                             <td id="s_n_1"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_2">
                             <td id="t_id_2">102</td>
                             <td id="t_o_id_2"></td>
                             <td id="t_o_n_2"></td>
                             <td id="s_n_2"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_3">
                             <td id="t_id_3">103</td>
                             <td id="t_o_id_3"></td>
                             <td id="t_o_n_3"></td>
                             <td id="s_n_3"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_4">
                             <td id="t_id_4">104</td>
                             <td id="t_o_id_4"></td>
                             <td id="t_o_n_4"></td>
                             <td id="s_n_4"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_5">
                             <td id="t_id_5">105</td>
                             <td id="t_o_id_5"></td>
                             <td id="t_o_n_5"></td>
                             <td id="s_n_5"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_6">
                             <td id="t_id_6">106</td>
                             <td id="t_o_id_6"></td>
                             <td id="t_o_n_6"></td>
                             <td id="s_n_6"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_7">
                             <td id="t_id_7">107</td>
                             <td id="t_o_id_7"></td>
                             <td id="t_o_n_7"></td>
                             <td id="s_n_7"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_8">
                             <td id="t_id_8">108</td>
                             <td id="t_o_id_8"></td>
                             <td id="t_o_n_8"></td>
                             <td id="s_n_8"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_9">
                             <td id="t_id_9">109</td>
                             <td id="t_o_id_9"></td>
                             <td id="t_o_n_9"></td>
                             <td id="s_n_9"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_10">
                             <td id="t_id_10">110</td>
                             <td id="t_o_id_10"></td>
                             <td id="t_o_n_10"></td>
                             <td id="s_n_10"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_11">
                             <td id="t_id_11">111</td>
                             <td id="t_o_id_11"></td>
                             <td id="t_o_n_11"></td>
                             <td id="s_n_11"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_12">
                             <td id="t_id_12">112</td>
                             <td id="t_o_id_12"></td>
                             <td id="t_o_n_12"></td>
                             <td id="s_n_12"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_13">
                             <td id="t_id_13">113</td>
                             <td id="t_o_id_13"></td>
                             <td id="t_o_n_13"></td>
                             <td id="s_n_13"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_14">
                             <td id="t_id_14">114</td>
                             <td id="t_o_id_14"></td>
                             <td id="t_o_n_14"></td>
                             <td id="s_n_14"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_15">
                             <td id="t_id_15">115</td>
                             <td id="t_o_id_15"></td>
                             <td id="t_o_n_15"></td>
                             <td id="s_n_15"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_16">
                             <td id="t_id_16">116</td>
                             <td id="t_o_id_16"></td>
                             <td id="t_o_n_16"></td>
                             <td id="s_n_16"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_17">
                             <td id="t_id_17">117</td>
                             <td id="t_o_id_17"></td>
                             <td id="t_o_n_17"></td>
                             <td id="s_n_17"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_18">
                             <td id="t_id_18">118</td>
                             <td id="t_o_id_18"></td>
                             <td id="t_o_n_18"></td>
                             <td id="s_n_18"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_19">
                             <td id="t_id_19">119</td>
                             <td id="t_o_id_19"></td>
                             <td id="t_o_n_19"></td>
                             <td id="s_n_19"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_20">
                             <td id="t_id_20">120</td>
                             <td id="t_o_id_20"></td>
                             <td id="t_o_n_20"></td>
                             <td id="s_n_20"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_21">
                             <td id="t_id_21">121</td>
                             <td id="t_o_id_21"></td>
                             <td id="t_o_n_21"></td>
                             <td id="s_n_21"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_22">
                             <td id="t_id_22">122</td>
                             <td id="t_o_id_22"></td>
                             <td id="t_o_n_22"></td>
                             <td id="s_n_22"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_23">
                             <td id="t_id_23">123</td>
                             <td id="t_o_id_23"></td>
                             <td id="t_o_n_23"></td>
                             <td id="s_n_23"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_24">
                             <td id="t_id_24">124</td>
                             <td id="t_o_id_24"></td>
                             <td id="t_o_n_24"></td>
                             <td id="s_n_24"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_25">
                             <td id="t_id_25">125</td>
                             <td id="t_o_id_25"></td>
                             <td id="t_o_n_25"></td>
                             <td id="s_n_25"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_26">
                             <td id="t_id_26">126</td>
                             <td id="t_o_id_26"></td>
                             <td id="t_o_n_26"></td>
                             <td id="s_n_26"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_27">
                             <td id="t_id_27">127</td>
                             <td id="t_o_id_27"></td>
                             <td id="t_o_n_27"></td>
                             <td id="s_n_27"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_28">
                             <td id="t_id_28">128</td>
                             <td id="t_o_id_28"></td>
                             <td id="t_o_n_28"></td>
                             <td id="s_n_28"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_29">
                             <td id="t_id_29">129</td>
                             <td id="t_o_id_29"></td>
                             <td id="t_o_n_29"></td>
                             <td id="s_n_29"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_30">
                             <td id="t_id_30">130</td>
                             <td id="t_o_id_30"></td>
                             <td id="t_o_n_30"></td>
                             <td id="s_n_30"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_31">
                             <td id="t_id_31">131</td>
                             <td id="t_o_id_31"></td>
                             <td id="t_o_n_31"></td>
                             <td id="s_n_31"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_32">
                             <td id="t_id_32">132</td>
                             <td id="t_o_id_32"></td>
                             <td id="t_o_n_32"></td>
                             <td id="s_n_32"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_33">
                             <td id="t_id_33">133</td>
                             <td id="t_o_id_33"></td>
                             <td id="t_o_n_33"></td>
                             <td id="s_n_33"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_34">
                             <td id="t_id_34">134</td>
                             <td id="t_o_id_34"></td>
                             <td id="t_o_n_34"></td>
                             <td id="s_n_34"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_35">
                             <td id="t_id_35">135</td>
                             <td id="t_o_id_35"></td>
                             <td id="t_o_n_35"></td>
                             <td id="s_n_35"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_36">
                             <td id="t_id_36">136</td>
                             <td id="t_o_id_36"></td>
                             <td id="t_o_n_36"></td>
                             <td id="s_n_36"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_37">
                             <td id="t_id_37">137</td>
                             <td id="t_o_id_37"></td>
                             <td id="t_o_n_37"></td>
                             <td id="s_n_37"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_38">
                             <td id="t_id_38">138</td>
                             <td id="t_o_id_38"></td>
                             <td id="t_o_n_38"></td>
                             <td id="s_n_38"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_39">
                             <td id="t_id_39">139</td>
                             <td id="t_o_id_39"></td>
                             <td id="t_o_n_39"></td>
                             <td id="s_n_39"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_40">
                             <td id="t_id_40">140</td>
                             <td id="t_o_id_40"></td>
                             <td id="t_o_n_40"></td>
                             <td id="s_n_40"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_41">
                             <td id="t_id_41">141</td>
                             <td id="t_o_id_41"></td>
                             <td id="t_o_n_41"></td>
                             <td id="s_n_41"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_42">
                             <td id="t_id_42">142</td>
                             <td id="t_o_id_42"></td>
                             <td id="t_o_n_42"></td>
                             <td id="s_n_42"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_43">
                             <td id="t_id_43">143</td>
                             <td id="t_o_id_43"></td>
                             <td id="t_o_n_43"></td>
                             <td id="s_n_43"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_44">
                             <td id="t_id_44">144</td>
                             <td id="t_o_id_44"></td>
                             <td id="t_o_n_44"></td>
                             <td id="s_n_44"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_45">
                             <td id="t_id_45">145</td>
                             <td id="t_o_id_45"></td>
                             <td id="t_o_n_45"></td>
                             <td id="s_n_45"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_46">
                             <td id="t_id_46">146</td>
                             <td id="t_o_id_46"></td>
                             <td id="t_o_n_46"></td>
                             <td id="s_n_46"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_47">
                             <td id="t_id_47">147</td>
                             <td id="t_o_id_47"></td>
                             <td id="t_o_n_47"></td>
                             <td id="s_n_47"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_48">
                             <td id="t_id_48">148</td>
                             <td id="t_o_id_48"></td>
                             <td id="t_o_n_48"></td>
                             <td id="s_n_48"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_49">
                             <td id="t_id_49">149</td>
                             <td id="t_o_id_49"></td>
                             <td id="t_o_n_49"></td>
                             <td id="s_n_49"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_50">
                             <td id="t_id_50">150</td>
                             <td id="t_o_id_50"></td>
                             <td id="t_o_n_50"></td>
                             <td id="s_n_50"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_51">
                             <td id="t_id_51">151</td>
                             <td id="t_o_id_51"></td>
                             <td id="t_o_n_51"></td>
                             <td id="s_n_51"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_52">
                             <td id="t_id_52">152</td>
                             <td id="t_o_id_52"></td>
                             <td id="t_o_n_52"></td>
                             <td id="s_n_52"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_53">
                             <td id="t_id_53">153</td>
                             <td id="t_o_id_53"></td>
                             <td id="t_o_n_53"></td>
                             <td id="s_n_53"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_54">
                             <td id="t_id_54">154</td>
                             <td id="t_o_id_54"></td>
                             <td id="t_o_n_54"></td>
                             <td id="s_n_54"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_55">
                             <td id="t_id_55">155</td>
                             <td id="t_o_id_55"></td>
                             <td id="t_o_n_55"></td>
                             <td id="s_n_55"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_56">
                             <td id="t_id_56">156</td>
                             <td id="t_o_id_56"></td>
                             <td id="t_o_n_56"></td>
                             <td id="s_n_56"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_57">
                             <td id="t_id_57">157</td>
                             <td id="t_o_id_57"></td>
                             <td id="t_o_n_57"></td>
                             <td id="s_n_57"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_58">
                             <td id="t_id_58">158</td>
                             <td id="t_o_id_58"></td>
                             <td id="t_o_n_58"></td>
                             <td id="s_n_58"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_59">
                             <td id="t_id_59">159</td>
                             <td id="t_o_id_59"></td>
                             <td id="t_o_n_59"></td>
                             <td id="s_n_59"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_60">
                             <td id="t_id_60">160</td>
                             <td id="t_o_id_60"></td>
                             <td id="t_o_n_60"></td>
                             <td id="s_n_60"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_61">
                             <td id="t_id_61">161</td>
                             <td id="t_o_id_61"></td>
                             <td id="t_o_n_61"></td>
                             <td id="s_n_61"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_62">
                             <td id="t_id_62">162</td>
                             <td id="t_o_id_62"></td>
                             <td id="t_o_n_62"></td>
                             <td id="s_n_62"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_63">
                             <td id="t_id_63">163</td>
                             <td id="t_o_id_63"></td>
                             <td id="t_o_n_63"></td>
                             <td id="s_n_63"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_64">
                             <td id="t_id_64">164</td>
                             <td id="t_o_id_64"></td>
                             <td id="t_o_n_64"></td>
                             <td id="s_n_64"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_65">
                             <td id="t_id_65">165</td>
                             <td id="t_o_id_65"></td>
                             <td id="t_o_n_65"></td>
                             <td id="s_n_65"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_66">
                             <td id="t_id_66">166</td>
                             <td id="t_o_id_66"></td>
                             <td id="t_o_n_66"></td>
                             <td id="s_n_66"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_67">
                             <td id="t_id_67">167</td>
                             <td id="t_o_id_67"></td>
                             <td id="t_o_n_67"></td>
                             <td id="s_n_67"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_68">
                             <td id="t_id_68">168</td>
                             <td id="t_o_id_68"></td>
                             <td id="t_o_n_68"></td>
                             <td id="s_n_68"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_69">
                             <td id="t_id_69">169</td>
                             <td id="t_o_id_69"></td>
                             <td id="t_o_n_69"></td>
                             <td id="s_n_69"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_70">
                             <td id="t_id_70">170</td>
                             <td id="t_o_id_70"></td>
                             <td id="t_o_n_70"></td>
                             <td id="s_n_70"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_71">
                             <td id="t_id_71">171</td>
                             <td id="t_o_id_71"></td>
                             <td id="t_o_n_71"></td>
                             <td id="s_n_71"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_72">
                             <td id="t_id_72">172</td>
                             <td id="t_o_id_72"></td>
                             <td id="t_o_n_72"></td>
                             <td id="s_n_72"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_73">
                             <td id="t_id_73">173</td>
                             <td id="t_o_id_73"></td>
                             <td id="t_o_n_73"></td>
                             <td id="s_n_73"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_74">
                             <td id="t_id_74">174</td>
                             <td id="t_o_id_74"></td>
                             <td id="t_o_n_74"></td>
                             <td id="s_n_74"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_75">
                             <td id="t_id_75">175</td>
                             <td id="t_o_id_75"></td>
                             <td id="t_o_n_75"></td>
                             <td id="s_n_75"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_76">
                             <td id="t_id_76">176</td>
                             <td id="t_o_id_76"></td>
                             <td id="t_o_n_76"></td>
                             <td id="s_n_76"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_77">
                             <td id="t_id_77">177</td>
                             <td id="t_o_id_77"></td>
                             <td id="t_o_n_77"></td>
                             <td id="s_n_77"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_78">
                             <td id="t_id_78">178</td>
                             <td id="t_o_id_78"></td>
                             <td id="t_o_n_78"></td>
                             <td id="s_n_78"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_79">
                             <td id="t_id_79">179</td>
                             <td id="t_o_id_79"></td>
                             <td id="t_o_n_79"></td>
                             <td id="s_n_79"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_80">
                             <td id="t_id_80">180</td>
                             <td id="t_o_id_80"></td>
                             <td id="t_o_n_80"></td>
                             <td id="s_n_80"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_81">
                             <td id="t_id_81">181</td>
                             <td id="t_o_id_81"></td>
                             <td id="t_o_n_81"></td>
                             <td id="s_n_81"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_82">
                             <td id="t_id_82">182</td>
                             <td id="t_o_id_82"></td>
                             <td id="t_o_n_82"></td>
                             <td id="s_n_82"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_83">
                             <td id="t_id_83">183</td>
                             <td id="t_o_id_83"></td>
                             <td id="t_o_n_83"></td>
                             <td id="s_n_83"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_84">
                             <td id="t_id_84">184</td>
                             <td id="t_o_id_84"></td>
                             <td id="t_o_n_84"></td>
                             <td id="s_n_84"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_85">
                             <td id="t_id_85">185</td>
                             <td id="t_o_id_85"></td>
                             <td id="t_o_n_85"></td>
                             <td id="s_n_85"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_86">
                             <td id="t_id_86">186</td>
                             <td id="t_o_id_86"></td>
                             <td id="t_o_n_86"></td>
                             <td id="s_n_86"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_87">
                             <td id="t_id_87">187</td>
                             <td id="t_o_id_87"></td>
                             <td id="t_o_n_87"></td>
                             <td id="s_n_87"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_88">
                             <td id="t_id_88">188</td>
                             <td id="t_o_id_88"></td>
                             <td id="t_o_n_88"></td>
                             <td id="s_n_88"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_89">
                             <td id="t_id_89">189</td>
                             <td id="t_o_id_89"></td>
                             <td id="t_o_n_89"></td>
                             <td id="s_n_89"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_90">
                             <td id="t_id_90">190</td>
                             <td id="t_o_id_90"></td>
                             <td id="t_o_n_90"></td>
                             <td id="s_n_90"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_91">
                             <td id="t_id_91">191</td>
                             <td id="t_o_id_91"></td>
                             <td id="t_o_n_91"></td>
                             <td id="s_n_91"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_92">
                             <td id="t_id_92">192</td>
                             <td id="t_o_id_92"></td>
                             <td id="t_o_n_92"></td>
                             <td id="s_n_92"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_93">
                             <td id="t_id_93">193</td>
                             <td id="t_o_id_93"></td>
                             <td id="t_o_n_93"></td>
                             <td id="s_n_93"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_94">
                             <td id="t_id_94">194</td>
                             <td id="t_o_id_94"></td>
                             <td id="t_o_n_94"></td>
                             <td id="s_n_94"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_95">
                             <td id="t_id_95">195</td>
                             <td id="t_o_id_95"></td>
                             <td id="t_o_n_95"></td>
                             <td id="s_n_95"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_96">
                             <td id="t_id_96">196</td>
                             <td id="t_o_id_96"></td>
                             <td id="t_o_n_96"></td>
                             <td id="s_n_96"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_97">
                             <td id="t_id_97">197</td>
                             <td id="t_o_id_97"></td>
                             <td id="t_o_n_97"></td>
                             <td id="s_n_97"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_98">
                             <td id="t_id_98">198</td>
                             <td id="t_o_id_98"></td>
                             <td id="t_o_n_98"></td>
                             <td id="s_n_98"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_99">
                             <td id="t_id_99">199</td>
                             <td id="t_o_id_99"></td>
                             <td id="t_o_n_99"></td>
                             <td id="s_n_99"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_100">
                             <td id="t_id_100">200</td>
                             <td id="t_o_id_100"></td>
                             <td id="t_o_n_100"></td>
                             <td id="s_n_100"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_101">
                             <td id="t_id_101">201</td>
                             <td id="t_o_id_101"></td>
                             <td id="t_o_n_101"></td>
                             <td id="s_n_101"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_102">
                             <td id="t_id_102">202</td>
                             <td id="t_o_id_102"></td>
                             <td id="t_o_n_102"></td>
                             <td id="s_n_102"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_103">
                             <td id="t_id_103">203</td>
                             <td id="t_o_id_103"></td>
                             <td id="t_o_n_103"></td>
                             <td id="s_n_103"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_104">
                             <td id="t_id_104">204</td>
                             <td id="t_o_id_104"></td>
                             <td id="t_o_n_104"></td>
                             <td id="s_n_104"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_105">
                             <td id="t_id_105">205</td>
                             <td id="t_o_id_105"></td>
                             <td id="t_o_n_105"></td>
                             <td id="s_n_105"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_106">
                             <td id="t_id_106">206</td>
                             <td id="t_o_id_106"></td>
                             <td id="t_o_n_106"></td>
                             <td id="s_n_106"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_107">
                             <td id="t_id_107">207</td>
                             <td id="t_o_id_107"></td>
                             <td id="t_o_n_107"></td>
                             <td id="s_n_107"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_108">
                             <td id="t_id_108">208</td>
                             <td id="t_o_id_108"></td>
                             <td id="t_o_n_108"></td>
                             <td id="s_n_108"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_109">
                             <td id="t_id_109">209</td>
                             <td id="t_o_id_109"></td>
                             <td id="t_o_n_109"></td>
                             <td id="s_n_109"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_110">
                             <td id="t_id_110">210</td>
                             <td id="t_o_id_110"></td>
                             <td id="t_o_n_110"></td>
                             <td id="s_n_110"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_111">
                             <td id="t_id_111">211</td>
                             <td id="t_o_id_111"></td>
                             <td id="t_o_n_111"></td>
                             <td id="s_n_111"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_112">
                             <td id="t_id_112">212</td>
                             <td id="t_o_id_112"></td>
                             <td id="t_o_n_112"></td>
                             <td id="s_n_112"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_113">
                             <td id="t_id_113">213</td>
                             <td id="t_o_id_113"></td>
                             <td id="t_o_n_113"></td>
                             <td id="s_n_113"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_114">
                             <td id="t_id_114">214</td>
                             <td id="t_o_id_114"></td>
                             <td id="t_o_n_114"></td>
                             <td id="s_n_114"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_115">
                             <td id="t_id_115">215</td>
                             <td id="t_o_id_115"></td>
                             <td id="t_o_n_115"></td>
                             <td id="s_n_115"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_116">
                             <td id="t_id_116">216</td>
                             <td id="t_o_id_116"></td>
                             <td id="t_o_n_116"></td>
                             <td id="s_n_116"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_117">
                             <td id="t_id_117">217</td>
                             <td id="t_o_id_117"></td>
                             <td id="t_o_n_117"></td>
                             <td id="s_n_117"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_118">
                             <td id="t_id_118">218</td>
                             <td id="t_o_id_118"></td>
                             <td id="t_o_n_118"></td>
                             <td id="s_n_118"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_119">
                             <td id="t_id_119">219</td>
                             <td id="t_o_id_119"></td>
                             <td id="t_o_n_119"></td>
                             <td id="s_n_119"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_120">
                             <td id="t_id_120">220</td>
                             <td id="t_o_id_120"></td>
                             <td id="t_o_n_120"></td>
                             <td id="s_n_120"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_121">
                             <td id="t_id_121">221</td>
                             <td id="t_o_id_121"></td>
                             <td id="t_o_n_121"></td>
                             <td id="s_n_121"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_122">
                             <td id="t_id_122">222</td>
                             <td id="t_o_id_122"></td>
                             <td id="t_o_n_122"></td>
                             <td id="s_n_122"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_123">
                             <td id="t_id_123">223</td>
                             <td id="t_o_id_123"></td>
                             <td id="t_o_n_123"></td>
                             <td id="s_n_123"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_124">
                             <td id="t_id_124">224</td>
                             <td id="t_o_id_124"></td>
                             <td id="t_o_n_124"></td>
                             <td id="s_n_124"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_125">
                             <td id="t_id_125">225</td>
                             <td id="t_o_id_125"></td>
                             <td id="t_o_n_125"></td>
                             <td id="s_n_125"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_126">
                             <td id="t_id_126">226</td>
                             <td id="t_o_id_126"></td>
                             <td id="t_o_n_126"></td>
                             <td id="s_n_126"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_127">
                             <td id="t_id_127">227</td>
                             <td id="t_o_id_127"></td>
                             <td id="t_o_n_127"></td>
                             <td id="s_n_127"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_128">
                             <td id="t_id_128">228</td>
                             <td id="t_o_id_128"></td>
                             <td id="t_o_n_128"></td>
                             <td id="s_n_128"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_129">
                             <td id="t_id_129">229</td>
                             <td id="t_o_id_129"></td>
                             <td id="t_o_n_129"></td>
                             <td id="s_n_129"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_130">
                             <td id="t_id_130">230</td>
                             <td id="t_o_id_130"></td>
                             <td id="t_o_n_130"></td>
                             <td id="s_n_130"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_131">
                             <td id="t_id_131">231</td>
                             <td id="t_o_id_131"></td>
                             <td id="t_o_n_131"></td>
                             <td id="s_n_131"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_132">
                             <td id="t_id_132">232</td>
                             <td id="t_o_id_132"></td>
                             <td id="t_o_n_132"></td>
                             <td id="s_n_132"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_133">
                             <td id="t_id_133">234</td>
                             <td id="t_o_id_133"></td>
                             <td id="t_o_n_133"></td>
                             <td id="s_n_133"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_134">
                             <td id="t_id_134">234</td>
                             <td id="t_o_id_134"></td>
                             <td id="t_o_n_134"></td>
                             <td id="s_n_134"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_135">
                             <td id="t_id_135">235</td>
                             <td id="t_o_id_135"></td>
                             <td id="t_o_n_135"></td>
                             <td id="s_n_135"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_136">
                             <td id="t_id_136">236</td>
                             <td id="t_o_id_136"></td>
                             <td id="t_o_n_136"></td>
                             <td id="s_n_136"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_137">
                             <td id="t_id_137">237</td>
                             <td id="t_o_id_137"></td>
                             <td id="t_o_n_137"></td>
                             <td id="s_n_137"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_138">
                             <td id="t_id_138">238</td>
                             <td id="t_o_id_138"></td>
                             <td id="t_o_n_138"></td>
                             <td id="s_n_138"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_139">
                             <td id="t_id_139">239</td>
                             <td id="t_o_id_139"></td>
                             <td id="t_o_n_139"></td>
                             <td id="s_n_139"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_140">
                             <td id="t_id_140">240</td>
                             <td id="t_o_id_140"></td>
                             <td id="t_o_n_140"></td>
                             <td id="s_n_140"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_141">
                             <td id="t_id_141">241</td>
                             <td id="t_o_id_141"></td>
                             <td id="t_o_n_141"></td>
                             <td id="s_n_141"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_142">
                             <td id="t_id_142">242</td>
                             <td id="t_o_id_142"></td>
                             <td id="t_o_n_142"></td>
                             <td id="s_n_142"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_143">
                             <td id="t_id_143">243</td>
                             <td id="t_o_id_143"></td>
                             <td id="t_o_n_143"></td>
                             <td id="s_n_143"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_144">
                             <td id="t_id_144">244</td>
                             <td id="t_o_id_144"></td>
                             <td id="t_o_n_144"></td>
                             <td id="s_n_144"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_145">
                             <td id="t_id_145">245</td>
                             <td id="t_o_id_145"></td>
                             <td id="t_o_n_145"></td>
                             <td id="s_n_145"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_146">
                             <td id="t_id_146">246</td>
                             <td id="t_o_id_146"></td>
                             <td id="t_o_n_146"></td>
                             <td id="s_n_146"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_147">
                             <td id="t_id_147">247</td>
                             <td id="t_o_id_147"></td>
                             <td id="t_o_n_147"></td>
                             <td id="s_n_147"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_148">
                             <td id="t_id_148">248</td>
                             <td id="t_o_id_148"></td>
                             <td id="t_o_n_148"></td>
                             <td id="s_n_148"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_149">
                             <td id="t_id_149">249</td>
                             <td id="t_o_id_149"></td>
                             <td id="t_o_n_149"></td>
                             <td id="s_n_149"></td>
+                            <td class="td_btn_class"></td>
                         </tr>
                         <tr id="t_150">
                             <td id="t_id_150">250</td>
                             <td id="t_o_id_150"></td>
                             <td id="t_o_n_150"></td>
                             <td id="s_n_150"></td>
+                            <td class="td_btn_class"></td>
+
                         </tr>
                     </table>
                 </center>
             </div>
         </center>
 
+
         <center>
-            <div style="height: 400px;overflow: auto;">
+            <input type="text" id="Search_seller_name" onkeyup="Search_seller_name()" id="myInput"
+                placeholder="Search for Seller name.." class="search_by">
+        </center>
+
+        <center>
+            <div style="max-height: 400px;overflow: auto;">
                 <center>
-                    <h3 style="color: white;">Seller table</h3>
-                    <table id="tickets">
+                    <table id="sellers" class="table_css">
                         <tr>
                             <th>Seller name</th>
                             <th>Tickets Count</th>
@@ -1457,9 +1637,10 @@
 
         <div id="Sell_a_ticket" class="modal">
             <div class="modal-content animate">
-                <div class="box" style="background-color: rgba(0,0,0,0.9);">
+                <div class="box" style="background-color:black;border: 2px solid white;">
                     <label style="color: white; letter-spacing: 2px;padding: 14px 40px;">Sell a ticket</label>
-                    <input type="number" placeholder="Ticket NO" id="ticket_no" onclick="clr_err()">
+                    <input type="number" placeholder="Ticket NO" id="ticket_no" onclick="clr_err()"
+                        style="margin-top: 40px;">
                     <input type="number" placeholder="NSBM Id" id="nsbm_id" onclick="clr_err()">
                     <input type="text" placeholder="Name" id="name" onclick="clr_err()">
                     <span id="error"></span>
@@ -1496,47 +1677,107 @@
         var t_o_id_array = [];
         var t_o_n_array = [];
         var s_n_array = [];
+        var t_btn_array = [];
+        var seller_array = [];
+        var seller_n_array = [];
+        var seller_c_array = [];
+        var seller_m_array = [];
         var hh = 0;
         var kk = 0;
+        var gg = 0;
+        var seller_id_index_array = [];
+        seller_id_index_array[0] = "null";
 
+
+
+        Create_btn();
         declare_arrays();
         Arrange_table();
+        load_seller_id();
+        Arrange_seller_table();
 
-
+        document.getElementById("login_load").style.display = '';
         firebase.auth().onAuthStateChanged(function (user) {
+
             if (user) {
                 // User is signed in.
                 var user = firebase.auth().currentUser;
 
                 if (user != null) {
 
+
                     var user_uid = user.uid;
                     document.getElementById('login_div').style.display = 'none'
                     document.getElementById('Home_div').style.display = 'block'
+                    document.getElementById("login_load").style.display = 'none';
 
-                    var Seller_name = firebase.database().ref().child("Sellers").child(user_uid).child("username");
+                    var Seller_name = firebase.database().ref().child("All_users").child(user_uid).child("user_name");
                     Seller_name.on('value', snap => {
                         var Seller_name = snap.val();
                         document.getElementById("user_name").innerText = Seller_name;
                         document.getElementById("user_id").innerText = user_uid;
-                        firebase.database().ref().child("Sellers").child(user_uid).child("user_tickets_count").set(0);
-                        firebase.database().ref().child("Sellers").child(user_uid).child("user_money").set(0);
+
                         for (let index = 1; index < 151; index++) {
                             load_data(index);
                         }
+                        for (var indexx = 1; indexx < 21; indexx++) {
+                            load_seller_data(indexx);
+                        }
                     });
+
+                    var user_type = firebase.database().ref().child("All_users").child(user_uid).child("user_type");
+                    user_type.on('value', snap => {
+                        var user_type = snap.val();
+                        if (user_type == 'seller') {
+                            document.getElementById('sell_btn').style.display = '';
+                            firebase.database().ref().child("All_users").child(user_uid).child("user_tickets_count").set(0);
+                            firebase.database().ref().child("All_users").child(user_uid).child("user_money").set(0);
+                            document.getElementById('checked_in_count_label').style.display = 'none';
+                            document.getElementById('checked_in_count').style.display = 'none';
+                            document.getElementById('th_Check_in').style.display = 'none';
+                            var x = document.getElementsByClassName("td_btn_class");
+                            for (let index = 0; index < 150; index++) {
+                                indexplus = index + 1;
+                                x[index].style.display = "none";
+                            }
+                        }
+                        else if (user_type == 'user') {
+                            document.getElementById('checked_in_count_label').style.display = 'none';
+                            document.getElementById('checked_in_count').style.display = 'none';
+                            document.getElementById('th_Check_in').style.display = 'none';
+                            document.getElementById('sell_btn').style.display = 'none';
+                            var x = document.getElementsByClassName("td_btn_class");
+                            for (let index = 0; index < 150; index++) {
+                                indexplus = index + 1;
+                                x[index].style.display = "none";
+                            }
+                        }
+                        else if (user_type == 'admin') {
+                            document.getElementById('checked_in_count_label').style.display = '';
+                            document.getElementById('checked_in_count').style.display = '';
+                            document.getElementById('th_Check_in').style.display = '';
+                            document.getElementById('sell_btn').style.display = '';
+                            var x = document.getElementsByClassName("td_btn_class");
+                            for (let index = 0; index < 150; index++) {
+                                indexplus = index + 1;
+                                x[index].style.display = "";
+                            }
+                        }
+                    });
+
 
                 }
             } else {
                 // No user is signed in.
                 document.getElementById('login_div').style.display = 'block'
                 document.getElementById('Home_div').style.display = 'none'
+                document.getElementById("login_load").style.display = 'none';
             }
         });
 
 
         function login() {
-
+            document.getElementById("login_load").style.display = '';
             var userEmail = document.getElementById("email_field").value;
             var userPass = document.getElementById("password_field").value;
 
@@ -1546,7 +1787,7 @@
                 var errorMessage = error.message;
 
                 window.alert("Error : " + errorMessage);
-
+                document.getElementById("login_load").style.display = 'none';
                 // ...
             });
 
@@ -1556,9 +1797,6 @@
             firebase.auth().signOut();
         }
 
-        function searchHalls() {
-            alert("adasdaswd");
-        }
 
         // Get the modal
         var modal = document.getElementById('Sell_a_ticket');
@@ -1568,7 +1806,6 @@
             if (event.target == modal) {
                 modal.style.display = "none";
                 document.getElementById("error").innerText = "";
-
             }
         }
 
@@ -1576,6 +1813,7 @@
             document.getElementById("error").innerText = "";
             document.getElementById("Success").innerText = "";
         }
+
 
         function Sell_a_ticket() {
             var buyer_ticket_no = document.getElementById("ticket_no").value;
@@ -1609,10 +1847,10 @@
                         var firebaseRef = firebase.database().ref();
                         var seller = document.getElementById("user_name").innerText;
 
-
                         firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("buyer_nsbm_id").set(buyer_nsbm_id);
                         firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("buyer_name").set(buyer_name);
                         firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("seller_name").set(seller);
+                        firebaseRef.child("tickets").child(buyer_ticket_no - 100).child("checked_status").set(0);
                         firebaseRef.child("nsbmids").child(buyer_nsbm_id).set(buyer_nsbm_id);
 
                         document.getElementById("error").style.display = "none";
@@ -1626,6 +1864,22 @@
                 });
 
             });
+
+        }
+
+        function onclickButton(ii) {
+            var username = document.getElementById("user_name").innerText;
+            firebase.database().ref().child("tickets").child(ii).child("checked_status").set(1);
+            firebase.database().ref().child("tickets").child(ii).child("checked_by").set(username);
+        }
+
+        function Create_btn() {
+            var x = document.getElementsByClassName("td_btn_class");
+            for (let index = 0; index < 150; index++) {
+                indexplus = index + 1;
+                x[index].innerHTML = "<button id='t_btn_" + indexplus + "' onclick='onclickButton(" + indexplus + ")'>fasf</button>";
+                x[index].style.display = "none";
+            }
 
         }
 
@@ -1658,34 +1912,88 @@
 
                 if (s_n != null) {
                     kk++;
-                    document.getElementById("demo2").innerText = kk;
+                    document.getElementById("total_tickect_count").innerText = kk;
                     firebase.database().ref().child("All_data").child("Total_ticket_count_sold").set(kk);
                     firebase.database().ref().child("All_data").child("Total_cash_count").set(kk * 2000);
                 }
 
                 if (s_n == current_user) {
                     hh++;
-                    document.getElementById("demo").innerText = hh;
-                    firebase.database().ref().child("Sellers").child(seller_id).child("user_tickets_count").set(hh);
-                    firebase.database().ref().child("Sellers").child(seller_id).child("user_money").set(hh * 2000);
+                    firebase.database().ref().child("All_users").child(seller_id).child("user_tickets_count").set(hh);
+                    firebase.database().ref().child("All_users").child(seller_id).child("user_money").set(hh * 2000);
                 }
                 Arrange_table();
             });
-            /////////////////////////////////////////////////////////No_of_tickets_I_sold   Total_cash_I_have
 
-        }
+            var t_btn = firebase.database().ref().child("tickets").child(x).child("checked_status");
+            t_btn.on('value', snap => {
+                var t_btn = snap.val();
+                if (t_btn != null) {
 
-        for (let seindex = 1; seindex < 151; seindex++) {
-            load_seller_data(seindex);
-        }
+                    if (t_btn == 1) {
+                        gg++;
+                        document.getElementById("checked_in_count").innerText = gg;
+                        document.getElementById(t_btn_array[x]).innerText = "Checked in";
+                        document.getElementById(t_btn_array[x]).style.backgroundColor = "tomato";
+                        document.getElementById(t_btn_array[x]).style.cursor = "not-allowed";
+                    }
+                    else if (t_btn == 0) {
+                        document.getElementById(t_btn_array[x]).innerText = "Pending.....";
+                        document.getElementById(t_btn_array[x]).style.backgroundColor = "transparent";
+                        document.getElementById(t_btn_array[x]).style.cursor = "pointer";
+                    }
+                    else {
 
-        function load_seller_data(se) {
-            var t_o_id = firebase.database().ref().child("tickets").child(se).child("buyer_nsbm_id");
-            t_o_id.on('value', snap => {
-                var t_o_id = snap.val();
-                document.getElementById(t_o_id_array[se]).innerText = t_o_id;
-                Arrange_table();
+                    }
+                }
+
             });
+            /////////////////////////////////////////////////////////
+
+        }
+
+        function load_seller_id() {
+
+            for (let seller_id_index = 1; seller_id_index < 21; seller_id_index++) {
+
+                var seller_id = firebase.database().ref().child("Sellers_id").child(seller_id_index);
+                seller_id.on('value', snap => {
+                    var seller_id = snap.val();
+                    seller_id_index_array[seller_id_index] = seller_id;
+                });
+            }
+        }
+
+        function load_seller_data(seller_data_index) {
+
+            if (seller_id_index_array[seller_data_index] != null) {
+                var seller_n = firebase.database().ref().child("All_users").child(seller_id_index_array[seller_data_index]).child("user_name");
+                seller_n.on('value', snap => {
+                    var seller_n = snap.val();
+                    document.getElementById(seller_n_array[seller_data_index]).innerText = seller_n;
+                    Arrange_seller_table();
+                });
+
+                var seller_c = firebase.database().ref().child("All_users").child(seller_id_index_array[seller_data_index]).child("user_tickets_count");
+                seller_c.on('value', snap => {
+                    var seller_c = snap.val();
+                    document.getElementById(seller_c_array[seller_data_index]).innerText = seller_c;
+                });
+
+                var seller_m = firebase.database().ref().child("All_users").child(seller_id_index_array[seller_data_index]).child("user_money");
+                seller_m.on('value', snap => {
+                    var seller_m = snap.val();
+                    document.getElementById(seller_m_array[seller_data_index]).innerText = seller_m;
+                });
+
+            }
+            else {
+
+            }
+
+
+
+
         }
 
         function declare_arrays() {
@@ -1774,6 +2082,77 @@
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            t_btn_array[0] = "null"; t_btn_array[1] = "t_btn_1"; t_btn_array[2] = "t_btn_2"; t_btn_array[3] = "t_btn_3"; t_btn_array[4] = "t_btn_4"; t_btn_array[5] = "t_btn_5"; t_btn_array[6] = "t_btn_6"; t_btn_array[7] = "t_btn_7"; t_btn_array[8] = "t_btn_8"; t_btn_array[9] = "t_btn_9";
+            t_btn_array[10] = "t_btn_10"; t_btn_array[11] = "t_btn_11"; t_btn_array[12] = "t_btn_12"; t_btn_array[13] = "t_btn_13"; t_btn_array[14] = "t_btn_14"; t_btn_array[15] = "t_btn_15"; t_btn_array[16] = "t_btn_16"; t_btn_array[17] = "t_btn_17"; t_btn_array[18] = "t_btn_18"; t_btn_array[19] = "t_btn_19";
+            t_btn_array[20] = "t_btn_20"; t_btn_array[21] = "t_btn_21"; t_btn_array[22] = "t_btn_22"; t_btn_array[23] = "t_btn_23"; t_btn_array[24] = "t_btn_24"; t_btn_array[25] = "t_btn_25"; t_btn_array[26] = "t_btn_26"; t_btn_array[27] = "t_btn_27"; t_btn_array[28] = "t_btn_28"; t_btn_array[29] = "t_btn_29";
+            t_btn_array[30] = "t_btn_30"; t_btn_array[31] = "t_btn_31"; t_btn_array[32] = "t_btn_32"; t_btn_array[33] = "t_btn_33"; t_btn_array[34] = "t_btn_34"; t_btn_array[35] = "t_btn_35"; t_btn_array[36] = "t_btn_36"; t_btn_array[37] = "t_btn_37"; t_btn_array[38] = "t_btn_38"; t_btn_array[39] = "t_btn_39";
+            t_btn_array[40] = "t_btn_40"; t_btn_array[41] = "t_btn_41"; t_btn_array[42] = "t_btn_42"; t_btn_array[43] = "t_btn_43"; t_btn_array[44] = "t_btn_44"; t_btn_array[45] = "t_btn_45"; t_btn_array[46] = "t_btn_46"; t_btn_array[47] = "t_btn_47"; t_btn_array[48] = "t_btn_48"; t_btn_array[49] = "t_btn_49";
+            t_btn_array[50] = "t_btn_50"; t_btn_array[51] = "t_btn_51"; t_btn_array[52] = "t_btn_52"; t_btn_array[53] = "t_btn_53"; t_btn_array[54] = "t_btn_54"; t_btn_array[55] = "t_btn_55"; t_btn_array[56] = "t_btn_56"; t_btn_array[57] = "t_btn_57"; t_btn_array[58] = "t_btn_58"; t_btn_array[59] = "t_btn_59";
+            t_btn_array[60] = "t_btn_60"; t_btn_array[61] = "t_btn_61"; t_btn_array[62] = "t_btn_62"; t_btn_array[63] = "t_btn_63"; t_btn_array[64] = "t_btn_64"; t_btn_array[65] = "t_btn_65"; t_btn_array[66] = "t_btn_66"; t_btn_array[67] = "t_btn_67"; t_btn_array[68] = "t_btn_68"; t_btn_array[69] = "t_btn_69";
+            t_btn_array[70] = "t_btn_70"; t_btn_array[71] = "t_btn_71"; t_btn_array[72] = "t_btn_72"; t_btn_array[73] = "t_btn_73"; t_btn_array[74] = "t_btn_74"; t_btn_array[75] = "t_btn_75"; t_btn_array[76] = "t_btn_76"; t_btn_array[77] = "t_btn_77"; t_btn_array[78] = "t_btn_78"; t_btn_array[79] = "t_btn_79";
+            t_btn_array[80] = "t_btn_80"; t_btn_array[81] = "t_btn_81"; t_btn_array[82] = "t_btn_82"; t_btn_array[83] = "t_btn_83"; t_btn_array[84] = "t_btn_84"; t_btn_array[85] = "t_btn_85"; t_btn_array[86] = "t_btn_86"; t_btn_array[87] = "t_btn_87"; t_btn_array[88] = "t_btn_88"; t_btn_array[89] = "t_btn_89";
+            t_btn_array[90] = "t_btn_90"; t_btn_array[91] = "t_btn_91"; t_btn_array[92] = "t_btn_92"; t_btn_array[93] = "t_btn_93"; t_btn_array[94] = "t_btn_94"; t_btn_array[95] = "t_btn_95"; t_btn_array[96] = "t_btn_96"; t_btn_array[97] = "t_btn_97"; t_btn_array[98] = "t_btn_98"; t_btn_array[99] = "t_btn_99";
+            t_btn_array[100] = "t_btn_100"; t_btn_array[101] = "t_btn_101"; t_btn_array[102] = "t_btn_102"; t_btn_array[103] = "t_btn_103"; t_btn_array[104] = "t_btn_104"; t_btn_array[105] = "t_btn_105"; t_btn_array[106] = "t_btn_106"; t_btn_array[107] = "t_btn_107"; t_btn_array[108] = "t_btn_108"; t_btn_array[109] = "t_btn_109";
+            t_btn_array[110] = "t_btn_110"; t_btn_array[111] = "t_btn_111"; t_btn_array[112] = "t_btn_112"; t_btn_array[113] = "t_btn_113"; t_btn_array[114] = "t_btn_114"; t_btn_array[115] = "t_btn_115"; t_btn_array[116] = "t_btn_116"; t_btn_array[117] = "t_btn_117"; t_btn_array[118] = "t_btn_118"; t_btn_array[119] = "t_btn_119";
+            t_btn_array[120] = "t_btn_120"; t_btn_array[121] = "t_btn_121"; t_btn_array[122] = "t_btn_122"; t_btn_array[123] = "t_btn_123"; t_btn_array[124] = "t_btn_124"; t_btn_array[125] = "t_btn_125"; t_btn_array[126] = "t_btn_126"; t_btn_array[127] = "t_btn_127"; t_btn_array[128] = "t_btn_128"; t_btn_array[129] = "t_btn_129";
+            t_btn_array[130] = "t_btn_130"; t_btn_array[131] = "t_btn_131"; t_btn_array[132] = "t_btn_132"; t_btn_array[133] = "t_btn_133"; t_btn_array[134] = "t_btn_134"; t_btn_array[135] = "t_btn_135"; t_btn_array[136] = "t_btn_136"; t_btn_array[137] = "t_btn_137"; t_btn_array[138] = "t_btn_138"; t_btn_array[139] = "t_btn_139";
+            t_btn_array[140] = "t_btn_140"; t_btn_array[141] = "t_btn_141"; t_btn_array[142] = "t_btn_142"; t_btn_array[143] = "t_btn_143"; t_btn_array[144] = "t_btn_144"; t_btn_array[145] = "t_btn_145"; t_btn_array[146] = "t_btn_146"; t_btn_array[147] = "t_btn_147"; t_btn_array[148] = "t_btn_148"; t_btn_array[149] = "t_btn_149";
+            t_btn_array[150] = "t_btn_150";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            seller_array[0] = "null"; seller_array[1] = "seller_1"; seller_array[2] = "seller_2"; seller_array[3] = "seller_3"; seller_array[4] = "seller_4"; seller_array[5] = "seller_5"; seller_array[6] = "seller_6"; seller_array[7] = "seller_7"; seller_array[8] = "seller_8"; seller_array[9] = "seller_9";
+            seller_array[10] = "seller_10"; seller_array[11] = "seller_11"; seller_array[12] = "seller_12"; seller_array[13] = "seller_13"; seller_array[14] = "seller_14"; seller_array[15] = "seller_15"; seller_array[16] = "seller_16"; seller_array[17] = "seller_17"; seller_array[18] = "seller_18"; seller_array[19] = "seller_19";
+            seller_array[20] = "seller_20";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            seller_n_array[0] = "null"; seller_n_array[1] = "seller_n_1"; seller_n_array[2] = "seller_n_2"; seller_n_array[3] = "seller_n_3"; seller_n_array[4] = "seller_n_4"; seller_n_array[5] = "seller_n_5"; seller_n_array[6] = "seller_n_6"; seller_n_array[7] = "seller_n_7"; seller_n_array[8] = "seller_n_8"; seller_n_array[9] = "seller_n_9";
+            seller_n_array[10] = "seller_n_10"; seller_n_array[11] = "seller_n_11"; seller_n_array[12] = "seller_n_12"; seller_n_array[13] = "seller_n_13"; seller_n_array[14] = "seller_n_14"; seller_n_array[15] = "seller_n_15"; seller_n_array[16] = "seller_n_16"; seller_n_array[17] = "seller_n_17"; seller_n_array[18] = "seller_n_18"; seller_n_array[19] = "seller_n_19";
+            seller_n_array[20] = "seller_n_20";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            seller_c_array[0] = "null"; seller_c_array[1] = "seller_c_1"; seller_c_array[2] = "seller_c_2"; seller_c_array[3] = "seller_c_3"; seller_c_array[4] = "seller_c_4"; seller_c_array[5] = "seller_c_5"; seller_c_array[6] = "seller_c_6"; seller_c_array[7] = "seller_c_7"; seller_c_array[8] = "seller_c_8"; seller_c_array[9] = "seller_c_9";
+            seller_c_array[10] = "seller_c_10"; seller_c_array[11] = "seller_c_11"; seller_c_array[12] = "seller_c_12"; seller_c_array[13] = "seller_c_13"; seller_c_array[14] = "seller_c_14"; seller_c_array[15] = "seller_c_15"; seller_c_array[16] = "seller_c_16"; seller_c_array[17] = "seller_c_17"; seller_c_array[18] = "seller_c_18"; seller_c_array[19] = "seller_c_19";
+            seller_c_array[20] = "seller_c_20";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            seller_m_array[0] = "null"; seller_m_array[1] = "seller_m_1"; seller_m_array[2] = "seller_m_2"; seller_m_array[3] = "seller_m_3"; seller_m_array[4] = "seller_m_4"; seller_m_array[5] = "seller_m_5"; seller_m_array[6] = "seller_m_6"; seller_m_array[7] = "seller_m_7"; seller_m_array[8] = "seller_m_8"; seller_m_array[9] = "seller_m_9";
+            seller_m_array[10] = "seller_m_10"; seller_m_array[11] = "seller_m_11"; seller_m_array[12] = "seller_m_12"; seller_m_array[13] = "seller_m_13"; seller_m_array[14] = "seller_m_14"; seller_m_array[15] = "seller_m_15"; seller_m_array[16] = "seller_m_16"; seller_m_array[17] = "seller_m_17"; seller_m_array[18] = "seller_m_18"; seller_m_array[19] = "seller_m_19";
+            seller_m_array[20] = "seller_m_20";
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+        }
+
+
+        function Arrange_seller_table() {
+
+            for (var j = 1; j < 21; j++) {
+                var txt_value = document.getElementById(seller_n_array[j]).innerText;
+
+                if (txt_value == "undefined" || txt_value == "null" || txt_value == "") {
+                    document.getElementById(seller_array[j]).style.display = 'none';
+                }
+                else {
+                    document.getElementById(seller_array[j]).style.display = '';
+
+                }
+            }
         }
 
         function Arrange_table() {
@@ -1791,16 +2170,42 @@
             }
         }
 
-        function myFunction() {
+        function Search_tickect_number() {
             var input, filter, table, tr, td, i, txtValue;
-            input = document.getElementById("myInput");
-            var inputval = document.getElementById("myInput").value;
+            input = document.getElementById("Search_tickect_number");
+            var inputval = document.getElementById("Search_tickect_number").value;
             if (inputval == "") {
                 Arrange_table();
             }
             else {
                 filter = input.value.toUpperCase();
                 table = document.getElementById("tickets");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+                    }
+                }
+            }
+
+        }
+
+        function Search_seller_name() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Search_seller_name");
+            var inputval = document.getElementById("Search_seller_name").value;
+            if (inputval == "") {
+                Arrange_seller_table();
+            }
+            else {
+                filter = input.value.toUpperCase();
+                table = document.getElementById("sellers");
                 tr = table.getElementsByTagName("tr");
                 for (i = 0; i < tr.length; i++) {
                     td = tr[i].getElementsByTagName("td")[0];
